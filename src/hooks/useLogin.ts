@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { config } from "../config"
 import { useToast } from "@chakra-ui/react"
+import { useNavigate } from "react-router-dom"
 
 export default function useLogin() {
 
@@ -10,6 +11,7 @@ export default function useLogin() {
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const toast = useToast()
+    const navigate = useNavigate()
 
     const handleSubmit = async () => {
         try {
@@ -20,7 +22,7 @@ export default function useLogin() {
             })
             localStorage.setItem('token', data.token)
             localStorage.setItem('user', JSON.stringify(data.user))
-            window.location.reload()
+            navigate('/')
         } catch (error: any) {
             toast({
                 colorScheme: 'red',
