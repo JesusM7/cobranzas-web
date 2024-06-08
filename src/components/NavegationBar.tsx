@@ -2,7 +2,7 @@ import { Button, ButtonGroup } from "@chakra-ui/react";
 
 export default function NavegationBar() {
 
- return <ButtonGroup variant='outline' spacing='6' size={"lg"} justifyContent='center' border={"solid red"}>
+ return <ButtonGroup variant='outline' spacing='6' size={"lg"} border={"solid red"} paddingLeft={9}  >
 <Button colorScheme='blue'>Pagos</Button>
 <Button colorScheme='blue'>Cuentas</Button>
 <Button colorScheme='blue'>Clientes</Button>
