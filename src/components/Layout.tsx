@@ -1,15 +1,16 @@
 import { Outlet } from "react-router-dom";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import PageHeader from "./PageHeader";
+import Footer from "./Footer";
 
 export default function Layout() {
     return (
-        <div>
+        <Flex flexDirection={"column"} height={"100vh"}>
             <PageHeader />
-            <Box>
+            <Box flex={1}>
                 <Outlet />
             </Box>
-            <h1>Footer</h1>
-        </div>
+            <Footer />
+        </Flex>
     );
 }
