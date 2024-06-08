@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Stack } from "@chakra-ui/react";
+import { Button, ButtonGroup } from "@chakra-ui/react";
 
 export default function NavegationBar() {
 
