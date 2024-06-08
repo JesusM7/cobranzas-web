@@ -8,7 +8,7 @@ export default function UserMenu() {
 
     return <HStack spacing={2}>
         <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} > 
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon boxSize={5}/>} > 
                 {user?.name}
             </MenuButton>
             <MenuList>
