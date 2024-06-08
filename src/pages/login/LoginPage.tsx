@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
-import LoginHeader from "./partials/LoginHeader";
 import { LoginForm } from "./partials/LoginForm";
 import useSession from "../../hooks/useSession";
 import { Navigate } from "react-router-dom";
+import LoginHeader from "./partials/LoginHeader";
 
 export default function LoginPage() {
 
@@ -14,7 +14,6 @@ export default function LoginPage() {
 
     return (<Box
         boxSizing="border-box"
-        padding={'2%'}
         w='100%' h='98vh'>
         <LoginHeader />
         <Box display={'grid'} placeContent={'center'}>

@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
-import LoginHeader from "../pages/login/partials/LoginHeader";
 import { Box } from "@chakra-ui/react";
+import PageHeader from "./PageHeader";
 
 export default function Layout() {
     return (
         <div>
-            <LoginHeader />
+            <PageHeader />
             <Box>
                 <Outlet />
             </Box>
