@@ -4,13 +4,9 @@ import App from './App.tsx'
 import './index.css'
 import {
   ChakraBaseProvider,
-  extendBaseTheme,
-  theme as chakraTheme,
 } from '@chakra-ui/react'
+import { theme } from './theme.ts'
 
-const theme = extendBaseTheme({
-  ...chakraTheme,
-})
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
