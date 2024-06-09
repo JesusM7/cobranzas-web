@@ -1,14 +1,17 @@
-import { Box, Button, FormControl, FormErrorMessage, FormLabel, Grid, GridItem, Input, Text } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormErrorMessage, FormLabel, Grid, GridItem, Input, Text, useToast } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import StateSelect from "../../components/StateSelect";
 import MunicipalitySelect from "../../components/MuncipalitySelect";
 import { useState } from "react";
+import useSaveClient from "../../hooks/useSaveClient";
 
-export default function CreateClientPage({ initialValues }: { initialValues?: CreateClientFormValues }) {
+export default function CreateClientPage({ initialValues }: { initialValues?: CreateClientValues }) {
 
     const [stateId, setStateId] = useState<string>("amazonas");
+    const { saveClient, loading, error } = useSaveClient();
+    const toast = useToast();
 
-    const formik = useFormik<CreateClientFormValues>({
+    const formik = useFormik<CreateClientValues>({
         initialValues: initialValues || {
             name: "",
             email: "",
@@ -19,8 +22,18 @@ export default function CreateClientPage({ initialValues }: { initialValues?: Cr
         },
         validate: validateCreateClientForm,
         validateOnChange: true,
-        onSubmit: (values) => {
-            console.log(values);
+        onSubmit: async (values) => {
+            await saveClient(values);
+            toast({
+                title: error ? 'Error al crear cliente' : "Cliente creado",
+                description: error ? 'El cliente no pudo ser creado' : "El cliente fue creado exitosamente",
+                status: error ? 'error' : "success",
+                duration: 5000,
+                isClosable: true,
+            });
+            if (!error) {
+                formik.resetForm();
+            }
         },
     });
 
@@ -94,14 +107,14 @@ export default function CreateClientPage({ initialValues }: { initialValues?: Cr
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={12}>
-                    <Button colorScheme="secondary" type='submit'>Crear Cliente</Button>
+                    <Button isLoading={loading} colorScheme="secondary" type='submit'>Crear Cliente</Button>
                 </GridItem>
             </Grid>
         </form>
     </Box>
 }
 
-export type CreateClientFormValues = {
+export type CreateClientValues = {
     rif: string;
     name: string;
     email: string;
@@ -110,7 +123,7 @@ export type CreateClientFormValues = {
     municipalityId: string;
 }
 
-function validateCreateClientForm(values: CreateClientFormValues) {
+function validateCreateClientForm(values: CreateClientValues) {
     if (!values.rif) {
         return { rif: "El rif es requerido" };
     }
