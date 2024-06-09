@@ -1,10 +1,11 @@
-import {Flex, Img, Spacer, Stack, Text } from "@chakra-ui/react";
+import { Flex, Img, Spacer, Stack, Text } from "@chakra-ui/react";
 import Logo from '../assets/logo-meru.png';
 import UserMenu from "./UserMenu";
+import NavegationBar from "./NavegationBar";
 
 export default function PageHeader() {
 
-    return <Flex marginBottom='40px' bg='blue.900' alignItems={'center'} paddingX={'2.5%'} gap={'2ch'}>
+    return <Stack marginBottom='40px' bg='blue.900' ><Flex alignItems={'center'} paddingX={'2.5%'} gap={'2ch'}>
         <Img h='64px' src={Logo} alt='Logo Meru' />
         <Stack spacing={1}>
             <Text
@@ -21,4 +22,6 @@ export default function PageHeader() {
         <Spacer />
         <UserMenu />
     </Flex>
+        <NavegationBar />
+    </Stack>
 }
