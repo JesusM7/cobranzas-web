@@ -1,6 +1,7 @@
 import { Button, Icon, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { BsCash } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 export default function PaymentMenu() {
     return <Menu>
@@ -11,7 +12,7 @@ export default function PaymentMenu() {
         </MenuButton>
         <MenuList>
             <MenuItem> Nuevo Pago </MenuItem>
-            <MenuItem> Ver Pagos </MenuItem>
+            <MenuItem to={"/pagos"} as={Link}> Ver Pagos </MenuItem> {/* testeo */}
         </MenuList>
     </Menu>
 }

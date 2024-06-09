@@ -15,7 +15,7 @@ export const router = createBrowserRouter(
                         <HomePage />
                     </ProtectedRoute>
                 } />
-                <Route path="payments" element={
+                <Route path="pagos" element={
                     <ProtectedRoute>
                         <PaymentPage />
                     </ProtectedRoute>

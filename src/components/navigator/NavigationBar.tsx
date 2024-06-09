@@ -1,7 +1,7 @@
 import { Box, Button, ButtonGroup, Divider, Flex, HStack, Icon, Stack, Tag, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import PaymentMenu from "./PaymentMenu";
-import { MdAccountBalanceWallet } from "react-icons/md";
+import { MdAccountBalanceWallet, MdHome } from "react-icons/md";
 import { FaUserCheck } from "react-icons/fa";
 import { FaUsersRectangle } from "react-icons/fa6";
 import { GiPowderBag } from "react-icons/gi";
@@ -16,7 +16,7 @@ export default function NavigationBar() {
             paddingY={'15px'}
             paddingX={'10px'}>
             <Link to='/'>
-                <Button color='white' variant={'ghost'}>Home</Button>
+                <Button color='white' variant={'ghost'} leftIcon={<Icon as={MdHome} />}>Inicio</Button>
             </Link>
             <Divider orientation="vertical" />
             <PaymentMenu />

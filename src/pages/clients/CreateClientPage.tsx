@@ -43,7 +43,7 @@ export default function CreateClientPage({ initialValues }: { initialValues?: Cr
         <form onSubmit={formik.handleSubmit}>
             <Grid templateColumns={'repeat(12,1fr)'} gap={'10px'} marginY={'3%'}>
                 <GridItem colSpan={6}>
-                    <FormControl id='rif' isInvalid={!!formik.errors.rif}>
+                    <FormControl id='rif' isInvalid={!!formik.errors.rif    } >
                         <FormLabel as='legend'>RIF</FormLabel>
                         <Input
                             placeholder="J123456789"
@@ -55,33 +55,36 @@ export default function CreateClientPage({ initialValues }: { initialValues?: Cr
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={6}>
-                    <FormControl>
+                    <FormControl isInvalid={!!formik.errors.name}>
                         <FormLabel as='legend'>Nombre</FormLabel>
                         <Input
                             value={formik.values.name}
                             onChange={formik.handleChange}
                             name="name"
                         />
+                        <FormErrorMessage>{formik.errors.name}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={6}>
-                    <FormControl>
+                    <FormControl isInvalid={!!formik.errors.phoneNumber} >
                         <FormLabel as='legend'>Telefono</FormLabel>
                         <Input
                             value={formik.values.phoneNumber}
                             onChange={formik.handleChange}
                             name="phoneNumber"
                         />
+                        <FormErrorMessage>{formik.errors.phoneNumber}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={6}>
-                    <FormControl>
+                    <FormControl isInvalid={!!formik.errors.email}>
                         <FormLabel as='legend'>Correo</FormLabel>
                         <Input
                             value={formik.values.email}
                             onChange={formik.handleChange}
                             name="email"
                         />
+                        <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={6}>
@@ -91,19 +94,22 @@ export default function CreateClientPage({ initialValues }: { initialValues?: Cr
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={6}>
-                    <FormControl>
+                    <FormControl isInvalid={!!formik.errors.municipalityId} >
                         <FormLabel as='legend'>Municipio</FormLabel>
                         <MunicipalitySelect onChange={formik.handleChange} name='municipalityId' stateId={stateId} />
+                        <FormErrorMessage>{formik.errors.municipalityId}</FormErrorMessage>
                     </FormControl>
+
                 </GridItem>
                 <GridItem colSpan={12}>
-                    <FormControl>
+                    <FormControl isInvalid={!!formik.errors.address} >
                         <FormLabel as='legend'>Dirección</FormLabel>
                         <Input
                             value={formik.values.address}
                             onChange={formik.handleChange}
                             name="address"
                         />
+                        <FormErrorMessage>{formik.errors.address}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={12}>
@@ -124,6 +130,7 @@ export type CreateClientValues = {
 }
 
 function validateCreateClientForm(values: CreateClientValues) {
+
     if (!values.rif) {
         return { rif: "El rif es requerido" };
     }
@@ -132,5 +139,17 @@ function validateCreateClientForm(values: CreateClientValues) {
     }
     if (!values.name) {
         return { name: "El nombre es requerido" };
+    }
+    if (!values.phoneNumber) {
+        return { phoneNumber: "Debe ingresar un numero de telefono" }
+    }
+    if (!values.email.includes("@")) {
+        return { email: "Debe ingresar un Correo valido" }
+    }
+    if (!values.address) {
+        return { address: "Debe ingresar una dirección" }
+    }
+    if (!values.municipalityId) {
+        return { municipalityId: "Debe seleccionar un municipio" }
     }
 }
