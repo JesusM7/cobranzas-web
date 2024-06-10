@@ -29,7 +29,9 @@ export default function NavigationBar() {
             <Divider orientation="vertical" />
             <Button paddingX={'5px'} leftIcon={<Icon as={FaUserCheck} />} color='white' variant={'ghost'}>Vendedores</Button>
             <Divider orientation="vertical" />
-            <Button paddingX={'5px'} leftIcon={<Icon as={GiPowderBag} />} color='white' variant={'ghost'}>Productos</Button>
+            <Link to="/crear-producto">
+                <Button paddingX={'5px'} leftIcon={<Icon as={GiPowderBag} />} color='white' variant={'ghost'}>Productos</Button>
+            </Link>
             <Divider orientation="vertical" />
             <Button paddingX={'5px'} leftIcon={<Icon as={IoSettingsSharp} />} color='white' variant={'ghost'}>Configuracion</Button>
         </HStack>
