@@ -1,6 +1,10 @@
 import { extendTheme } from "@chakra-ui/react"
+import { buttonTheme } from "./button.theme"
 
 export const theme = extendTheme({
+    components: {
+        Button: buttonTheme,
+    },
     colors: {
         primary: {
             "50": "#f7f7f8",

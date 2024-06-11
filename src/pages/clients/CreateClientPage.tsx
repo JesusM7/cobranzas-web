@@ -38,12 +38,11 @@ export default function CreateClientPage({ initialValues }: { initialValues?: Cr
     });
 
     return <Box paddingX={'5%'} paddingY={'2.5%'}>
-        <Text color='secondary.500'
-            fontWeight={'bold'} fontSize={'xx-large'}>Crear cliente</Text>
+        <Text color='secondary.500' fontWeight={'bold'} fontSize={'xx-large'}>Crear cliente</Text>
         <form onSubmit={formik.handleSubmit}>
             <Grid templateColumns={'repeat(12,1fr)'} gap={'10px'} marginY={'3%'}>
                 <GridItem colSpan={6}>
-                    <FormControl id='rif' isInvalid={!!formik.errors.rif    } >
+                    <FormControl id='rif' isInvalid={!!formik.errors.rif} >
                         <FormLabel as='legend'>RIF</FormLabel>
                         <Input
                             placeholder="J123456789"

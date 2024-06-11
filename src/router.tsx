@@ -6,6 +6,7 @@ import Layout from "./components/Layout";
 import PaymentPage from "./pages/payments/PaymentPage";
 import CreateClientPage from "./pages/clients/CreateClientPage";
 import CreateProductPage from "./pages/products/CreateProductPage";
+import ClientPage from "./pages/clients/ClientPage";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -19,6 +20,11 @@ export const router = createBrowserRouter(
                 <Route path="pagos" element={
                     <ProtectedRoute>
                         <PaymentPage />
+                    </ProtectedRoute>
+                } />
+                <Route path="clientes" element={
+                    <ProtectedRoute>
+                        <ClientPage />
                     </ProtectedRoute>
                 } />
                 <Route path="crear-cliente" element={

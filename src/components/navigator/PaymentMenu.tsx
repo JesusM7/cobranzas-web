@@ -7,7 +7,7 @@ export default function PaymentMenu() {
     return <Menu>
         <MenuButton
             leftIcon={<Icon as={BsCash} />}
-            color='white' variant={'ghost'} as={Button} rightIcon={<ChevronDownIcon boxSize={5} />} >
+            color='white' variant={'navigation_ghost'} as={Button} rightIcon={<ChevronDownIcon boxSize={5} />} >
             Pagos
         </MenuButton>
         <MenuList>
