@@ -8,6 +8,7 @@ import CreateClientPage from "./pages/clients/CreateClientPage";
 import CreateProductPage from "./pages/products/CreateProductPage";
 import ClientPage from "./pages/clients/ClientPage";
 import ProductPage from "./pages/products/ProductPage";
+import CreateSellerPage from "./pages/sellers/CreateSellerPage";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -41,6 +42,11 @@ export const router = createBrowserRouter(
                 <Route path="crear-producto" element={
                     <ProtectedRoute>
                         <CreateProductPage />
+                    </ProtectedRoute>
+                } />
+                 <Route path="crear-vendedor" element={
+                    <ProtectedRoute>
+                        <CreateSellerPage />
                     </ProtectedRoute>
                 } />
             </Route>

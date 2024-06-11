@@ -82,6 +82,7 @@ export default function CreateClientPage({ initialValues }: { initialValues?: Cr
                             value={formik.values.email}
                             onChange={formik.handleChange}
                             name="email"
+                            type="email"
                         />
                         <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
                     </FormControl>
