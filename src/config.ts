@@ -3,5 +3,5 @@ type config = {
 }
 
 export const config: config = {
-    api: 'http://localhost:8080'
+    api: 'http://localhost:8081'
 }

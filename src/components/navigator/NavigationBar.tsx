@@ -37,7 +37,7 @@ export default function NavigationBar() {
                 variant={pathname === '/crear-vendedor' ? 'navigation' : 'navigation_ghost'}
             >Vendedores</Button>
             <Divider orientation="vertical" />
-            <Link to="/crear-producto">
+            <Link to="/productos">
                 <Button
                     paddingX={'5px'} leftIcon={<Icon as={GiPowderBag} />}
                     color='white'
