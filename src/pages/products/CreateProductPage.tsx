@@ -13,8 +13,8 @@ export default function CreateProductPage({ initialValues }: { initialValues?: C
         initialValues: initialValues || {
             sku: "",
             name: "",
-            price: "",
-            weightKg: "",
+            price: 0,
+            weightKg: 0,
         },
 
         validate: validateCreateProductForm,
@@ -65,10 +65,10 @@ export default function CreateProductPage({ initialValues }: { initialValues?: C
                     <FormControl isInvalid={!!formik.errors.price} >
                         <FormLabel as='legend'>Precio unitario</FormLabel>
                         <NumberInput defaultValue={0} precision={2} step={0.2}>
-                            <NumberInputField 
-                            value={formik.values.price}
-                            onChange={formik.handleChange}
-                            name="price" />
+                            <NumberInputField
+                                value={formik.values.price}
+                                onChange={(e) => formik.setFieldValue('price', Number.parseFloat(e.currentTarget.value))}
+                                name="price" />
                             <NumberInputStepper>
                                 <NumberIncrementStepper />
                                 <NumberDecrementStepper />
@@ -80,11 +80,11 @@ export default function CreateProductPage({ initialValues }: { initialValues?: C
                 <GridItem colSpan={6}>
                     <FormControl isInvalid={!!formik.errors.weightKg}>
                         <FormLabel as='legend'>Peso Kg</FormLabel>
-                          <NumberInput defaultValue={0} precision={2} step={0.2}>
-                            <NumberInputField 
-                             value={formik.values.weightKg}
-                             onChange={formik.handleChange}
-                             name="weightKg" />
+                        <NumberInput defaultValue={0} precision={2} step={0.2}>
+                            <NumberInputField
+                                value={formik.values.weightKg}
+                                onChange={(e) => formik.setFieldValue('weightKg', Number.parseFloat(e.currentTarget.value))}
+                                name="weightKg" />
                             <NumberInputStepper>
                                 <NumberIncrementStepper />
                                 <NumberDecrementStepper />
@@ -104,8 +104,8 @@ export default function CreateProductPage({ initialValues }: { initialValues?: C
 export type CreateProductValues = {
     sku: string;
     name: string;
-    price: string;
-    weightKg: string;
+    price: number;
+    weightKg: number;
 }
 
 function validateCreateProductForm(values: CreateProductValues) {
