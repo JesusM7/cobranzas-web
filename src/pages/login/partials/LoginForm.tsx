@@ -11,7 +11,7 @@ export function LoginForm() {
     } = useLogin()
 
     return <Box
-        bg='blue.900'
+        bg='primary.900'
         w={'600px'}
         p={'5%'}
         borderRadius={'lg'}>

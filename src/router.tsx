@@ -9,6 +9,7 @@ import CreateProductPage from "./pages/products/CreateProductPage";
 import ClientPage from "./pages/clients/ClientPage";
 import ProductPage from "./pages/products/ProductPage";
 import CreateSellerPage from "./pages/sellers/CreateSellerPage";
+import SellerPage from "./pages/sellers/SellerPage";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -42,6 +43,11 @@ export const router = createBrowserRouter(
                 <Route path="crear-producto" element={
                     <ProtectedRoute>
                         <CreateProductPage />
+                    </ProtectedRoute>
+                } />
+                  <Route path="vendedores" element={
+                    <ProtectedRoute>
+                        <SellerPage />
                     </ProtectedRoute>
                 } />
                  <Route path="crear-vendedor" element={

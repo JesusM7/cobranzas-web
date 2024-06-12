@@ -32,7 +32,7 @@ export default function NavigationBar() {
                     paddingX={'5px'} leftIcon={<Icon as={FaUsersRectangle} />}>Clientes</Button>
             </Link>
             <Divider orientation="vertical" />
-            <Link to={"/crear-vendedor"}>
+            <Link to={"/vendedores"}>
                 <Button paddingX={'5px'} leftIcon={<Icon as={FaUserCheck} />}
                     color='white'
                     variant={pathname === '/crear-vendedor' ? 'navigation' : 'navigation_ghost'}

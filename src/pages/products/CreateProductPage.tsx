@@ -109,7 +109,18 @@ export type CreateProductValues = {
 }
 
 function validateCreateProductForm(values: CreateProductValues) {
-    
+    if (!values.sku) {
+        return { sku: "El sku es requerido" };
+    }
+    if (!values.name) {
+        return { name: "El nombre es requerido" };
+    }
+    if (values.name.length < 3) {
+        return { name: "El nombre no puede ser menor a 3 letras" };
+    }
+    if (!values.weightKg) {
+        return { weightKg: "El peso del producto es requerido" };
+    }
 }
 
 

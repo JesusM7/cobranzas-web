@@ -140,6 +140,9 @@ function validateCreateClientForm(values: CreateClientValues) {
     if (!values.name) {
         return { name: "El nombre es requerido" };
     }
+    if (values.name.length < 3) {
+        return { name: "El nombre no puede ser menor a 3 letras" };
+    }
     if (!values.phoneNumber) {
         return { phoneNumber: "Debe ingresar un numero de telefono" }
     }

@@ -100,7 +100,24 @@ export type CreateSellerValues = {
 }
 
 function validateCreateSellerForm(values: CreateSellerValues) {
-
+    if (!values.name) {
+        return { name: "El nombre es requerido" };
+    }
+    if (values.name.length < 3) {
+        return { name: "El nombre no puede ser menor a 3 letras" };
+    }
+    if (!values.phoneNumber) {
+        return { phoneNumber: "El Número de Teléfono es requerido" };
+    }
+    if (!values.documentId) {
+        return { documentId: "El número de cedula es requerido" };
+    }
+    if (values.documentId.length < 7) {
+        return { documentId: "El nombre no puede ser menor a 7 digitos" };
+    }
+    if (!values.email) {
+        return { email: "El Correo electrónico es requerido" };
+    }
 }
 
 
