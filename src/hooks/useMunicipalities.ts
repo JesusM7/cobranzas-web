@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { config } from "../config";
 import useSession from "./useSession";
+import { State } from "./useStates";
 
 export default function useMunicipalities({ stateId }: { stateId?: string }) {
     const [municipalities, setMunicipalities] = useState<Municipality[]>([]);
@@ -42,4 +43,5 @@ export type Municipality = {
     id: string;
     name: string;
     stateId: string;
+    state?: State;
 }

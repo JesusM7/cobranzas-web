@@ -22,8 +22,8 @@ export default function ClientList() {
                 <Tr key={client.id}>
                     <Td>{client.rif}</Td>
                     <Td>{client.name}</Td>
-                    <Td>-</Td>
-                    <Td>-</Td>
+                    <Td>{client.municipality?.state?.name}</Td>
+                    <Td>{client.municipality?.name}</Td>
                     <Td>{client.address}</Td>
                     <Td>{client.email}</Td>
                     <Td>{client.phoneNumber}</Td>

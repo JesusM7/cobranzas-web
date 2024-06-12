@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { config } from "../config";
 import useSession from "./useSession";
+import { Municipality } from "./useMunicipalities";
 
 export default function useClients() {
     const [clients, setClients] = useState<Client[]>([]);
@@ -45,4 +46,5 @@ export type Client = {
     address: string;
     municipalityId: string;
     email: string | undefined;
+    municipality?: Municipality;
 }
