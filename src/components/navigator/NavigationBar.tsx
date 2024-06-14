@@ -7,6 +7,7 @@ import { FaUsersRectangle } from "react-icons/fa6";
 import { GiPowderBag } from "react-icons/gi";
 import { IoSettingsSharp } from "react-icons/io5";
 import moment from "moment";
+import { AddIcon } from "@chakra-ui/icons";
 
 export default function NavigationBar() {
 
@@ -61,7 +62,9 @@ export default function NavigationBar() {
                     {moment().locale('es').format('ddd DD MMM YYYY')}
                 </Text>
                 <Flex alignItems={'center'} gap='1ch'>
-                    <Tag colorScheme='green' variant='solid' size='md'>$ BCV 36,5411</Tag>
+                    <Link to="tasas">
+                        <Tag colorScheme='green' variant='solid' size='md'>$ BCV 36,5411</Tag>
+                    </Link>
                 </Flex>
             </Stack>
         </Box>

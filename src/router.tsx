@@ -10,6 +10,7 @@ import ClientPage from "./pages/clients/ClientPage";
 import ProductPage from "./pages/products/ProductPage";
 import CreateSellerPage from "./pages/sellers/CreateSellerPage";
 import SellerPage from "./pages/sellers/SellerPage";
+import ExchangeRateList from "./pages/enchange-rate/ExchangeRateList";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -53,6 +54,11 @@ export const router = createBrowserRouter(
                  <Route path="crear-vendedor" element={
                     <ProtectedRoute>
                         <CreateSellerPage />
+                    </ProtectedRoute>
+                } />
+                <Route path="tasas" element={
+                    <ProtectedRoute>
+                        <ExchangeRateList />
                     </ProtectedRoute>
                 } />
             </Route>
