@@ -4,7 +4,7 @@ import useSeller from "../../hooks/useSeller";
 
 export default function SellerList() {
 
-    const { clients } = useSeller()
+    const { seller: seller } = useSeller()
 
     return <Table variant={'striped'}>
         <Thead>
@@ -16,12 +16,12 @@ export default function SellerList() {
             </Tr>
         </Thead>
         <Tbody>
-            {clients.map((client) => (
-                <Tr key={client.id}>
-                    <Td>{client.name}</Td>
-                    <Td>{client.documentId}</Td>
-                    <Td>{client.email}</Td>
-                    <Td>{client.phoneNumber}</Td>
+            {seller.map((seller) => (
+                <Tr key={seller.id}>
+                    <Td>{seller.name}</Td>
+                    <Td>{seller.documentId}</Td>
+                    <Td>{seller.email}</Td>
+                    <Td>{seller.phoneNumber}</Td>
                 </Tr>
             ))}
         </Tbody>

@@ -8,6 +8,7 @@ import { GiPowderBag } from "react-icons/gi";
 import { IoSettingsSharp } from "react-icons/io5";
 import moment from "moment";
 import { AddIcon } from "@chakra-ui/icons";
+import TodayExchangeRate from "./TodayExchangeRate";
 
 export default function NavigationBar() {
 
@@ -50,23 +51,6 @@ export default function NavigationBar() {
             <Divider orientation="vertical" />
             <Button paddingX={'5px'} leftIcon={<Icon as={IoSettingsSharp} />} color='white' variant={'navigation_ghost'}>Configuracion</Button>
         </HStack>
-        <Box
-            w='100%'
-            h='100%'
-            display={'flex'}
-            pr={'20px'}
-            alignItems={'center'}
-            justifyContent={'flex-end'}>
-            <Stack textAlign={'center'}>
-                <Text color={'white'} fontWeight={'light'}>
-                    {moment().locale('es').format('ddd DD MMM YYYY')}
-                </Text>
-                <Flex alignItems={'center'} gap='1ch'>
-                    <Link to="tasas">
-                        <Tag colorScheme='green' variant='solid' size='md'>$ BCV 36,5411</Tag>
-                    </Link>
-                </Flex>
-            </Stack>
-        </Box>
+       <TodayExchangeRate />
     </HStack>
 }

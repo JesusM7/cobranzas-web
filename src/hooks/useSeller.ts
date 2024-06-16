@@ -30,7 +30,7 @@ export default function useSeller() {
     }, []);
 
     return {
-        clients: seller,
+        seller,
         loading,
         error
     }

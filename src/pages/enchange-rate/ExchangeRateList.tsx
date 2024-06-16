@@ -1,7 +1,10 @@
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import moment from "moment";
+import useExchangeRate from "../../hooks/useExchangeRate";
 
 export default function ExchangeRateList() {
+    
+    const { exchangeRate } = useExchangeRate()
 
     return <Table variant={'striped'}>
         <Thead>
@@ -12,21 +15,13 @@ export default function ExchangeRateList() {
             </Tr>
         </Thead>
         <Tbody>
-            <Tr>
-                <Td>USD</Td>
-                <Td>36.4856</Td>
-                <Td> {moment().locale('es').format('ddd DD MMM YYYY')} </Td>
-            </Tr>
-            <Tr>
-                <Td>USD</Td>
-                <Td>36.4856</Td>
-                <Td> {moment().locale('es').format('ddd DD MMM YYYY')} </Td>
-            </Tr>
-            <Tr>
-                <Td>USD</Td>
-                <Td>36.4856</Td>
-                <Td> {moment().locale('es').format('ddd DD MMM YYYY')} </Td>
-            </Tr>
+            {exchangeRate.map((exchangeRate) => (
+                <Tr key={exchangeRate.id}>
+                    <Td>{exchangeRate.rate}</Td>
+                    <Td>{exchangeRate.currency}</Td>
+                    <Td>{moment(exchangeRate.date).format("DD-MM-YYYY")}</Td>
+                </Tr>
+            ))}
         </Tbody>
     </Table>
 }
