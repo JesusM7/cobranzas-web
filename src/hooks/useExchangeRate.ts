@@ -70,6 +70,27 @@ export function useLatestExchangeRate() {
     }
 }
 
+export type Currency = "USD" | "BS";
+
+export function useCurrencyExchange(amount: number, from: Currency, to: Currency) {
+    const { exchangeRate } = useLatestExchangeRate()
+    if (!exchangeRate) {
+        return 0;
+    }
+
+    if (from === "USD" && to === "BS") {
+        return amount * exchangeRate.rate;
+    }
+
+    if (from === "BS" && to === "USD") {
+        return amount / exchangeRate.rate;
+    }
+
+    return amount;
+
+}
+
+
 export type ExchangeRate = {
     id: string
     rate: number
