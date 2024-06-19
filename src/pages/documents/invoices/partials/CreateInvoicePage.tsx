@@ -10,11 +10,11 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
     const formik = useFormik<CreateInvoiceValues>({
         initialValues: initialValues || {
             number: 0,
-            client: "",
             date: "",
-            expirationDate: "",
             amountUsd: 0,
             amountBs: 0,
+            clientId: "",
+            sellerId: "",
             paymentCondition: "",
             creditDays: 0,
             observation: "",
@@ -53,14 +53,14 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={6}>
-                    <FormControl isInvalid={!!formik.errors.client}>
+                    <FormControl isInvalid={!!formik.errors.clientId}>
                         <FormLabel as='legend'>Cliente</FormLabel>
                         <Input
-                            value={formik.values.client}
+                            value={formik.values.clientId}
                             onChange={formik.handleChange}
-                            name="client"
+                            name="clientId"
                         />
-                        <FormErrorMessage>{formik.errors.client}</FormErrorMessage>
+                        <FormErrorMessage>{formik.errors.clientId}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={6}>
@@ -75,15 +75,7 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={6}>
-                    <FormControl isInvalid={!!formik.errors.expirationDate}>
-                        <FormLabel as='legend'>Fecha de Vencimiento</FormLabel>
-                        <Input
-                            value={formik.values.expirationDate}
-                            onChange={formik.handleChange}
-                            name="expirationDate"
-                        />
-                        <FormErrorMessage>{formik.errors.expirationDate}</FormErrorMessage>
-                    </FormControl>
+                    Expiration Date
                 </GridItem>
                 <GridItem colSpan={6}>
                     <FormControl isInvalid={!!formik.errors.amountUsd} >
@@ -129,6 +121,17 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                         <FormErrorMessage>{formik.errors.creditDays}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
+                <GridItem colSpan={6}>
+                    <FormControl isInvalid={!!formik.errors.sellerId} >
+                        <FormLabel as='legend'>Vendedor</FormLabel>
+                        <Input
+                            value={formik.values.sellerId}
+                            onChange={formik.handleChange}
+                            name="sellerId"
+                        />
+                        <FormErrorMessage>{formik.errors.sellerId}</FormErrorMessage>
+                    </FormControl>
+                </GridItem>
                 <GridItem colSpan={12}>
                     <FormControl isInvalid={!!formik.errors.observation} >
                         <FormLabel as='legend'>Observación</FormLabel>
@@ -150,16 +153,16 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
 
 export type CreateInvoiceValues = {
     number: number;
-    client: string;
     date: string;
-    expirationDate: string;
     amountUsd: number;
-    amountBs: number,
+    amountBs: number;
+    clientId: string;
+    sellerId: string;
     paymentCondition: string;
     creditDays: number;
     observation: string;
 }
 
 function validateCreateClientForm(values: CreateInvoiceValues) {
-    return values
+    return {}
 }
