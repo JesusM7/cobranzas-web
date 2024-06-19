@@ -11,6 +11,8 @@ import ProductPage from "./pages/products/ProductPage";
 import CreateSellerPage from "./pages/sellers/CreateSellerPage";
 import SellerPage from "./pages/sellers/SellerPage";
 import ExchangeRateList from "./pages/enchange-rate/ExchangeRateList";
+import InvoicePage from "./pages/documents/invoices/InvoicePage";
+import CreateInvoicePage from "./pages/documents/invoices/partials/CreateInvoicePage";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -38,7 +40,7 @@ export const router = createBrowserRouter(
                 } />
                 <Route path="productos" element={
                     <ProtectedRoute>
-                        <ProductPage/>
+                        <ProductPage />
                     </ProtectedRoute>
                 } />
                 <Route path="crear-producto" element={
@@ -46,12 +48,12 @@ export const router = createBrowserRouter(
                         <CreateProductPage />
                     </ProtectedRoute>
                 } />
-                  <Route path="vendedores" element={
+                <Route path="vendedores" element={
                     <ProtectedRoute>
                         <SellerPage />
                     </ProtectedRoute>
                 } />
-                 <Route path="crear-vendedor" element={
+                <Route path="crear-vendedor" element={
                     <ProtectedRoute>
                         <CreateSellerPage />
                     </ProtectedRoute>
@@ -61,7 +63,18 @@ export const router = createBrowserRouter(
                         <ExchangeRateList />
                     </ProtectedRoute>
                 } />
+                <Route path="facturas" element={
+                    <ProtectedRoute>
+                        <InvoicePage />
+                    </ProtectedRoute>
+                } />
+                <Route path="crear-factura" element={
+                    <ProtectedRoute>
+                        <CreateInvoicePage />
+                    </ProtectedRoute>
+                } />
             </Route>
+
 
             <Route path="/login" element={<LoginPage />} />
         </>,

@@ -1,4 +1,4 @@
-import { Box, Flex, Stack, Tag, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Stack, Text } from "@chakra-ui/react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { useLatestExchangeRate } from "../../hooks/useExchangeRate";
@@ -20,9 +20,9 @@ export default function TodayExchangeRate() {
         </Text>
         <Flex alignItems={'center'} gap='1ch'>
             <Link to="tasas">
-                <Tag colorScheme='green' variant='solid' size='md'>
+                <Button colorScheme='green' variant='solid' size='xs'>
                     $ BCV {exchangeRate ? exchangeRate.rate : '...'}
-                </Tag>
+                </Button>
             </Link>
         </Flex>
     </Stack>

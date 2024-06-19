@@ -1,14 +1,13 @@
 import { Box, Button, Divider, Flex, HStack, Icon, Stack, Tag, Text } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import PaymentMenu from "./PaymentMenu";
-import { MdAccountBalanceWallet, MdHome } from "react-icons/md";
+import { MdHome } from "react-icons/md";
 import { FaUserCheck } from "react-icons/fa";
 import { FaUsersRectangle } from "react-icons/fa6";
 import { GiPowderBag } from "react-icons/gi";
 import { IoSettingsSharp } from "react-icons/io5";
-import moment from "moment";
-import { AddIcon } from "@chakra-ui/icons";
 import TodayExchangeRate from "./TodayExchangeRate";
+import DocumentsMenu from "./DocumentsMenu";
 
 export default function NavigationBar() {
 
@@ -25,7 +24,8 @@ export default function NavigationBar() {
             <Divider orientation="vertical" />
             <PaymentMenu />
             <Divider orientation="vertical" />
-            <Button paddingX={'5px'} leftIcon={<Icon as={MdAccountBalanceWallet} />} color='white' variant={'navigation_ghost'}>Cuentas</Button>
+            {/* <Button paddingX={'5px'} leftIcon={<Icon as={MdAccountBalanceWallet} />} color='white' variant={'navigation_ghost'}>Documentos</Button> */}
+            <DocumentsMenu />
             <Divider orientation="vertical" />
             <Link to='/clientes'>
                 <Button
