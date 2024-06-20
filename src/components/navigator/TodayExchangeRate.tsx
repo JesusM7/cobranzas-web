@@ -21,7 +21,7 @@ export default function TodayExchangeRate() {
         <Flex alignItems={'center'} gap='1ch'>
             <Link to="tasas">
                 <Button colorScheme='green' variant='solid' size='xs'>
-                    $ BCV {exchangeRate ? exchangeRate.rate : '...'}
+                    $ BCV {exchangeRate ? exchangeRate.rate.toString() : '...'}
                 </Button>
             </Link>
         </Flex>

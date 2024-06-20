@@ -17,7 +17,7 @@ export default function ExchangeRateList() {
         <Tbody>
             {exchangeRate.map((exchangeRate) => (
                 <Tr key={exchangeRate.id}>
-                    <Td>{exchangeRate.rate}</Td>
+                    <Td>{exchangeRate.rate.toString()}</Td>
                     <Td>{exchangeRate.currency}</Td>
                     <Td>{moment(exchangeRate.date).format("DD-MM-YYYY")}</Td>
                 </Tr>

@@ -1,16 +1,18 @@
-import { Box, Button, FormControl, FormErrorMessage, FormLabel, Grid, GridItem, Input, NumberInput, NumberInputField, NumberInputStepper, Select, Text, useToast } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormErrorMessage, FormLabel, Grid, GridItem, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, Text, useToast } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import useSaveInvoice from "../../../../hooks/useSaveInvoice";
 import ClientSelect from "../../../../components/ClientSelect";
 import moment from "moment";
 import { PaymentCondition } from "../../../../enums/PaymentCondition";
 import SellerSelect from "../../../../components/SellerSelect";
-import { useCurrencyExchange } from "../../../../hooks/useExchangeRate";
+import { useLatestExchangeRate } from "../../../../hooks/useExchangeRate";
+import { useEffect } from "react";
 
 export default function CreateInvoicePage({ initialValues }: { initialValues?: CreateInvoiceValues }) {
 
     const { saveInvoice, loading, error } = useSaveInvoice();
     const toast = useToast();
+    const { exchangeRate } = useLatestExchangeRate();
 
     const formik = useFormik<CreateInvoiceValues>({
         initialValues: initialValues || {
@@ -20,6 +22,7 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
             amountBs: 0,
             clientId: "",
             sellerId: "",
+            exchangeRate: exchangeRate?.rate || 0,
             paymentCondition: PaymentCondition.COUNTED,
             creditDays: 0,
             observation: "",
@@ -27,7 +30,8 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
         validate: validateCreateClientForm,
         validateOnChange: true,
         onSubmit: async (values) => {
-            await saveInvoice(values);
+            console.log(values);
+            // await saveInvoice(values);
             toast({
                 title: error ? 'Error al crear la Factura' : "Factura creada",
                 description: error ? 'La factura no pudo ser creada' : "La factura fue creada exitosamente",
@@ -40,6 +44,25 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
             }
         },
     });
+
+    useEffect(() => {
+        const usd = formik.values.amountUsd;
+        const rate = formik.values.exchangeRate;
+        const bs = usd * rate;
+        formik.setFieldValue('amountBs', isNaN(bs) ? 0 : bs);
+    }, [formik.values.exchangeRate, formik.values.amountUsd]);
+
+    useEffect(() => {
+        const bs = formik.values.amountBs;
+        const rate = formik.values.exchangeRate;
+        const usd = bs / rate;
+        formik.setFieldValue('amountUsd', isNaN(usd) ? 0 : usd);
+    }, [formik.values.exchangeRate, formik.values.amountBs]);
+
+    useEffect(() => {
+        formik.setFieldValue('exchangeRate', exchangeRate?.rate || 0);
+    }, [exchangeRate]);
+
 
     return <Box paddingX={'5%'} paddingY={'2.5%'}>
         <Text color='secondary.500' fontWeight={'bold'} fontSize={'xx-large'}>Crear factura</Text>
@@ -99,35 +122,53 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                         <FormErrorMessage>{formik.errors.creditDays}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
-                <GridItem colSpan={3}>
+                <GridItem colSpan={4}>
+                    <FormControl>
+                        <FormLabel as='legend'>Tasa de cambio</FormLabel>
+                        <NumberInput defaultValue={formik.values.exchangeRate}>
+                            <Input
+                                value={formik.values.exchangeRate}
+                                onChange={(e) => formik.setFieldValue('exchangeRate', Number.parseFloat(e.currentTarget.value))}
+                                name="exchangeRate" />
+                        </NumberInput>
+                        <FormErrorMessage>{formik.errors.exchangeRate}</FormErrorMessage>
+                    </FormControl>
+                </GridItem>
+                <GridItem colSpan={4}>
                     <FormControl isInvalid={!!formik.errors.amountUsd} >
                         <FormLabel as='legend'>Monto USD</FormLabel>
-                        <NumberInput defaultValue={0}>
-                            <NumberInputField
-                                value={formik.values.amountUsd}
-                                onChange={(e) => formik.setFieldValue('amountUsd', Number.parseFloat(e.currentTarget.value))}
-                                name="amountUsd" />
+                        <NumberInput
+                            onChange={(_, valueAsNumber) => formik.setFieldValue('amountUsd', valueAsNumber || 0)}
+                            defaultValue={formik.values.amountUsd}
+                            value={formik.values.amountUsd.toFixed(2)}
+                            precision={2}
+                            step={0.2}>
+                            <NumberInputField />
+                            <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                            </NumberInputStepper>
                         </NumberInput>
                         <FormErrorMessage>{formik.errors.amountUsd}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
-                <GridItem colSpan={3}>
+                <GridItem colSpan={4}>
                     <FormControl isInvalid={!!formik.errors.amountBs} >
                         <FormLabel as='legend'>Monto Bs</FormLabel>
-                        <NumberInput defaultValue={0}>
-                            <NumberInputField
-                                value={formik.values.amountBs}
-                                onChange={(e) => formik.setFieldValue('amountBs', Number.parseFloat(e.currentTarget.value))}
-                                name="amountBs" />
+                        <NumberInput
+                            onChange={(_, valueAsNumber) => formik.setFieldValue('amountBs', valueAsNumber || 0)}
+                            defaultValue={formik.values.amountBs}
+                            value={formik.values.amountBs.toFixed(2)}
+                            precision={1}
+                            step={0.2}>
+                            <NumberInputField />
+                            <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                            </NumberInputStepper>
                         </NumberInput>
                         <FormErrorMessage>{formik.errors.amountUsd}</FormErrorMessage>
                     </FormControl>
-                </GridItem>
-                <GridItem colSpan={3}>
-                    Select tasa de cambio
-                </GridItem>
-                <GridItem colSpan={3}>
-                    Input tasa de cambio (manual)
                 </GridItem>
                 <GridItem colSpan={6}>
                     <FormControl isInvalid={!!formik.errors.paymentCondition} >
@@ -180,6 +221,7 @@ export type CreateInvoiceValues = {
     paymentCondition: PaymentCondition;
     creditDays: number;
     observation: string;
+    exchangeRate: number;
 }
 
 function validateCreateClientForm(values: CreateInvoiceValues) {
