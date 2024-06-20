@@ -29,7 +29,7 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
         onSubmit: async (values) => {
             await saveInvoice(values);
             toast({
-                title: error ? 'Error al crear la Factura' : "Factura creado",
+                title: error ? 'Error al crear la Factura' : "Factura creada",
                 description: error ? 'La factura no pudo ser creada' : "La factura fue creada exitosamente",
                 status: error ? 'error' : "success",
                 duration: 5000,
