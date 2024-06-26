@@ -30,8 +30,7 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
         validate: validateCreateClientForm,
         validateOnChange: true,
         onSubmit: async (values) => {
-            console.log(values);
-            // await saveInvoice(values);
+            await saveInvoice(values);
             toast({
                 title: error ? 'Error al crear la Factura' : "Factura creada",
                 description: error ? 'La factura no pudo ser creada' : "La factura fue creada exitosamente",
@@ -64,11 +63,18 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
     }, [exchangeRate]);
 
 
+    useEffect(() => {
+        if ([PaymentCondition.COUNTED, PaymentCondition.CONSIGNMENT].includes(formik.values.paymentCondition)) {
+            formik.setFieldValue('creditDays', 0);
+        }
+    }, [formik.values.paymentCondition])
+
+
     return <Box paddingX={'5%'} paddingY={'2.5%'}>
         <Text color='secondary.500' fontWeight={'bold'} fontSize={'xx-large'}>Crear factura</Text>
         <form onSubmit={formik.handleSubmit}>
             <Grid templateColumns={'repeat(12,1fr)'} gap={'10px'} marginY={'3%'}>
-                <GridItem colSpan={6}>
+                <GridItem colSpan={3}>
                     <FormControl id='number' isInvalid={!!formik.errors.number} >
                         <FormLabel as='legend'>Número de Factura</FormLabel>
                         <NumberInput defaultValue={0}>
@@ -87,6 +93,17 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                         <FormErrorMessage>{formik.errors.clientId}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
+                <GridItem colSpan={3}>
+                    <FormControl isInvalid={!!formik.errors.paymentCondition} >
+                        <FormLabel as='legend'>Condición de pago</FormLabel>
+                        <Select value={formik.values.paymentCondition} onChange={formik.handleChange} name='paymentCondition'>
+                            <option value={PaymentCondition.CONSIGNMENT}>Consignación</option>
+                            <option value={PaymentCondition.CREDIT}>Crédito</option>
+                            <option value={PaymentCondition.COUNTED}>Contado</option>
+                        </Select>
+                        <FormErrorMessage>{formik.errors.paymentCondition}</FormErrorMessage>
+                    </FormControl>
+                </GridItem>
                 <GridItem colSpan={4}>
                     <FormControl isInvalid={!!formik.errors.date} >
                         <FormLabel as='legend'>Fecha de Emisión</FormLabel>
@@ -102,11 +119,13 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                 <GridItem colSpan={4}>
                     <FormControl isInvalid={!!formik.errors.creditDays} >
                         <FormLabel as='legend'>Días de crédito</FormLabel>
-                        <Input
-                            value={formik.values.creditDays}
-                            onChange={formik.handleChange}
-                            name="creditDays"
-                        />
+                        <NumberInput defaultValue={0} value={formik.values.creditDays.toString()}>
+                            <NumberInputField
+                                disabled={[PaymentCondition.COUNTED, PaymentCondition.CONSIGNMENT].includes(formik.values.paymentCondition)}
+                                value={formik.values.creditDays.toString()}
+                                onChange={(e) => formik.setFieldValue('creditDays', Number.parseFloat(e.currentTarget.value))}
+                                name="creditDays" />
+                        </NumberInput>
                         <FormErrorMessage>{formik.errors.creditDays}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
@@ -140,7 +159,7 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                         <NumberInput
                             onChange={(_, valueAsNumber) => formik.setFieldValue('amountUsd', valueAsNumber || 0)}
                             defaultValue={formik.values.amountUsd}
-                            value={formik.values.amountUsd.toFixed(2)}
+                            value={formik.values.amountUsd}
                             precision={2}
                             step={0.2}>
                             <NumberInputField />
@@ -158,7 +177,7 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                         <NumberInput
                             onChange={(_, valueAsNumber) => formik.setFieldValue('amountBs', valueAsNumber || 0)}
                             defaultValue={formik.values.amountBs}
-                            value={formik.values.amountBs.toFixed(2)}
+                            value={formik.values.amountBs}
                             precision={1}
                             step={0.2}>
                             <NumberInputField />
@@ -168,17 +187,6 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                             </NumberInputStepper>
                         </NumberInput>
                         <FormErrorMessage>{formik.errors.amountUsd}</FormErrorMessage>
-                    </FormControl>
-                </GridItem>
-                <GridItem colSpan={6}>
-                    <FormControl isInvalid={!!formik.errors.paymentCondition} >
-                        <FormLabel as='legend'>Condición de pago</FormLabel>
-                        <Select value={formik.values.paymentCondition} onChange={formik.handleChange} name='paymentCondition'>
-                            <option value={PaymentCondition.CONSIGNMENT}>Consignación</option>
-                            <option value={PaymentCondition.CREDIT}>Crédito</option>
-                            <option value={PaymentCondition.COUNTED}>Contado</option>
-                        </Select>
-                        <FormErrorMessage>{formik.errors.paymentCondition}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={6}>

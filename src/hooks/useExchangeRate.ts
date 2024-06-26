@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { config } from "../config";
 import useSession from "./useSession";
 
@@ -37,6 +37,37 @@ export default function useExchangeRate() {
 
 }
 
+export function useRefreshExchangeRate(updater: Dispatch<SetStateAction<ExchangeRate | undefined>>) {
+    const [exchangeRate, setExchangeRate] = useState<ExchangeRate | undefined>(undefined);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
+    const { token } = useSession();
+
+    const fetchExchangeRate = async () => {
+        try {
+            setLoading(true);
+            const { data } = await axios.get<ExchangeRate>(`${config.api}/api/v1/exchange-rate`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            setExchangeRate(data);
+            updater(data);
+        } catch (error) {
+            setError("Error al cargar las tasas de cambio");
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    return {
+        fetchExchangeRate,
+        exchangeRate,
+        loading,
+        error
+    }
+}
+
 export function useLatestExchangeRate() {
     const [exchangeRate, setExchangeRate] = useState<ExchangeRate | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);
@@ -65,6 +96,7 @@ export function useLatestExchangeRate() {
 
     return {
         exchangeRate,
+        setExchangeRate,
         loading,
         error
     }

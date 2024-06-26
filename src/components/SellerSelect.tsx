@@ -5,7 +5,7 @@ import useSeller from "../hooks/useSeller";
 export default function SellerSelect({ onChange, value, name }: SelectProps) {
     const { seller: sellers } = useSeller();
 
-    return <Select name={name} onChange={onChange} value={value}>
+    return <Select placeholder="Seleccione" name={name} onChange={onChange} value={value}>
         {sellers.map((seller) => <option key={seller.id} value={seller.id}>
             {seller.name} - {seller.documentId}
         </option>)}

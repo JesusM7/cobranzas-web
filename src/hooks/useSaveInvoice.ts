@@ -9,10 +9,10 @@ export default function useSaveInvoice() {
     const [error, setError] = useState<string | null>(null);
     const { token } = useSession();
 
-    const saveInvoice = async (client: CreateInvoiceValues) => {
+    const saveInvoice = async (invoice: CreateInvoiceValues) => {
         setLoading(true);
         try {
-            await axios.post(`${config.api}/undefined`, client, {
+            await axios.post(`${config.api}/api/v1/invoices`, invoice, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

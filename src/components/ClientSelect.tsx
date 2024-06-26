@@ -5,7 +5,7 @@ import useClients from "../hooks/useClients";
 export default function ClientSelect({ onChange, value, name }: SelectProps) {
     const { clients } = useClients();
 
-    return <Select name={name} onChange={onChange} value={value}>
+    return <Select placeholder="Seleccione" name={name} onChange={onChange} value={value}>
         {clients.map((client) => <option key={client.id} value={client.id}>
             {client.name}
         </option>)}
