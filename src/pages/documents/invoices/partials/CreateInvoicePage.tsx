@@ -1,5 +1,5 @@
 import { Box, Button, FormControl, FormErrorMessage, FormLabel, Grid, GridItem, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, Text, useToast } from "@chakra-ui/react";
-import { useFormik } from "formik";
+import { isNaN, useFormik } from "formik";
 import useSaveInvoice from "../../../../hooks/useSaveInvoice";
 import ClientSelect from "../../../../components/ClientSelect";
 import moment from "moment";
@@ -233,5 +233,36 @@ export type CreateInvoiceValues = {
 }
 
 function validateCreateClientForm(values: CreateInvoiceValues) {
-    return {}
+
+    if (!values.number) {
+        return { number: "El N° de factura es requerido" };
+    }
+    if (!values.clientId) {
+        return { clientId: "Debe seleccionar un cliente" };
+    }
+    if (!values.exchangeRate) {
+        return { exchangeRate: "Debe ingresar una tasa de cambio" };
+    }
+    
+    if (values.exchangeRate < 0) {
+        return { exchangeRate: "Debe ingresar una tasa mayor a 0" };
+    }
+    if (!values.amountUsd) {
+        return { amountUsd: "Debe ingresar el monto en USD" };
+    }
+    if (values.amountUsd < 0) {
+        return { amountUsd: "Debe ingresar un monto USD valido" };
+    }
+    if (!values.amountBs) {
+        return { amountBs: "Debe ingresar el monto en Bs" };
+    }
+    if (values.amountBs < 0) {
+        return { amountBs: "Debe ingresar un monto Bs valido" };
+    }
+    if (values.creditDays < 0) { 
+        return { creditDays: "Los dias de credito no pueden ser negativos" };
+    }
+    if (!values.sellerId) {
+        return { sellerId: "Debe seleccionar un Vendedor" };
+    }
 }
