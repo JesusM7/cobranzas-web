@@ -1,9 +1,17 @@
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import useInvoices from "../../../../hooks/useInvoices";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 
 export default function InvoiceList() {
 
-    // const { invoice } = useInvoice()
+    const { invoices, loading } = useInvoices()
+    const navigate = useNavigate()
+
+    if (loading) {
+        return <div>Cargando...</div>
+    }
 
     return <Table variant={'striped'}>
         <Thead>
@@ -19,26 +27,22 @@ export default function InvoiceList() {
             </Tr>
         </Thead>
         <Tbody>
-                <Tr>
-                    <Td>003645</Td>
-                    <Td>Jesus, C.A.</Td>
-                    <Td>7.200</Td>
-                    <Td>3.000</Td>
-                    <Td>30/05/2024</Td>
-                    <Td>04/06/2024</Td>
-                    <Td>Oficina</Td>
-                    <Td>Orden de compra 001717</Td>
+            {invoices.map(invoice => (
+                <Tr _hover={{
+                    color: 'secondary.500',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                }} key={invoice.id} onClick={() => navigate(`/facturas/${invoice.number}/abonos`)}>
+                    <Td>{invoice.number}</Td>
+                    <Td>{invoice.client.name}</Td>
+                    <Td>{invoice.amountUsd}</Td>
+                    <Td>-</Td>
+                    <Td>{moment(invoice.date).format('DD-MM-YYYY')}</Td>
+                    <Td>{moment(invoice.expirationDate).format('DD-MM-YYYY')}</Td>
+                    <Td>{invoice.seller.name}</Td>
+                    <Td>{invoice.observation}</Td>
                 </Tr>
-                <Tr>
-                    <Td>003645</Td>
-                    <Td>Jesus, C.A.</Td>
-                    <Td>7.200</Td>
-                    <Td>3.000</Td>
-                    <Td>30/05/2024</Td>
-                    <Td>04/06/2024</Td>
-                    <Td>Oficina</Td>
-                    <Td></Td>
-                </Tr>
+            ))}
         </Tbody>
     </Table>
 }

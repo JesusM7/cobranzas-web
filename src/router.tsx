@@ -13,6 +13,7 @@ import SellerPage from "./pages/sellers/SellerPage";
 import ExchangeRateList from "./pages/enchange-rate/ExchangeRateList";
 import InvoicePage from "./pages/documents/invoices/InvoicePage";
 import CreateInvoicePage from "./pages/documents/invoices/partials/CreateInvoicePage";
+import ChargesPage from "./pages/documents/invoices/ChargesPage/ChargesPage";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -66,6 +67,11 @@ export const router = createBrowserRouter(
                 <Route path="facturas" element={
                     <ProtectedRoute>
                         <InvoicePage />
+                    </ProtectedRoute>
+                } />
+                <Route path='facturas/:invoiceNumber/abonos' element={
+                    <ProtectedRoute>
+                        <ChargesPage />
                     </ProtectedRoute>
                 } />
                 <Route path="crear-factura" element={
