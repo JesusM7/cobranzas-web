@@ -17,6 +17,10 @@ export default function InvoiceInfo({ invoice }: { invoice: Invoice }) {
                     <Td>{invoice.number}</Td>
                 </Tr>
                 <Tr>
+                    <Td fontWeight={'bold'}>Cliente</Td>
+                    <Td>{invoice.client.name}</Td>
+                </Tr>
+                <Tr>
                     <Td fontWeight={'bold'}>F. Emisión</Td>
                     <Td>{moment(invoice.date).format('DD-MM-YYYY')}</Td>
                 </Tr>

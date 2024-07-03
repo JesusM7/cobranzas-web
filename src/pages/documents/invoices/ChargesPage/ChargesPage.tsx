@@ -2,6 +2,7 @@ import { Card, Flex } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import useInvoice from "../../../../hooks/useInvoice";
 import InvoiceInfo from "./partials/InvoiceInfo";
+import ChargesList from "./partials/ChargesList";
 
 export default function ChargesPage() {
 
@@ -18,7 +19,7 @@ export default function ChargesPage() {
                 <InvoiceInfo invoice={invoice} />
             </Card>
             <Card w='33.33%'>
-                Listado de abonos
+                <ChargesList invoice={invoice} />
             </Card>
             <Card w='33.33%'>
                 Agregar abono
