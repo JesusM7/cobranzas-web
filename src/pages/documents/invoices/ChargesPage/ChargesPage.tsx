@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useInvoice from "../../../../hooks/useInvoice";
 import InvoiceInfo from "./partials/InvoiceInfo";
 import ChargesList from "./partials/ChargesList";
+import CreateCharges from "./partials/CreateCharge";
 
 export default function ChargesPage() {
 
@@ -22,7 +23,7 @@ export default function ChargesPage() {
                 <ChargesList invoice={invoice} />
             </Card>
             <Card w='33.33%'>
-                Agregar abono
+                <CreateCharges invoiceNumber={invoice.number}/>
             </Card>
         </Flex>
     )

@@ -19,6 +19,7 @@ export default function useCharges(invoiceId: string | undefined) {
 export type Charges = {
     id: string;
     amount: number;
+    amountBs: number;
     date: string;
     exchangeRate: number;
     ref: string;

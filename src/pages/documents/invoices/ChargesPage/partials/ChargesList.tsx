@@ -14,18 +14,21 @@ export default function ChargesList({ invoice }: { invoice: Invoice }) {
         <Thead>
             <Tr>
                 <Th>Fecha</Th>
-                <Th>Abono</Th>
+                <Th>Abono USD</Th>
                 <Th>Banco</Th>
                 <Th>Ref</Th>
             </Tr>
         </Thead>
-        <Tbody>
-            <Tr>
-                <Td>{moment(invoice.date).format('DD-MM-YYYY')}</Td>
-                <Td>{}</Td>
-                <Td>{}</Td>
-                <Td>{}</Td>
+        <Tbody> 
+            {charges.map(charge => (
+                <Tr key={charge.id}>
+                <Td>{moment(charge.date).format('DD-MM-YYYY')}</Td>
+                <Td>{charge.amount} USD</Td>
+                <Td>{charge.bank}</Td>
+                <Td>{charge.ref}</Td>
             </Tr>
+            ))}
+            
         </Tbody>
     </Table>
 }
