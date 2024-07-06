@@ -6,14 +6,14 @@ export default function ExtraInfoHomePage(){
 
         <Card >
             <Stat padding={'15px'}>
-                <StatLabel  fontWeight={600} >Deuda mas alta</StatLabel>
+                <StatLabel  fontWeight={600} >Mayor monto por cobrar</StatLabel>
                 <StatNumber color={"green"}>154 USD</StatNumber>
                 <StatHelpText>Jesús, C.A. - Factura 3664</StatHelpText>
             </Stat>
         </Card>
         <Card >
             <Stat padding={'15px'}  >
-                <StatLabel  fontWeight={600} >Con mas dias vencida</StatLabel>
+                <StatLabel  fontWeight={600} >Factura con mas dias vencidos</StatLabel>
                 <StatNumber color={"brown"}  >45 Dias</StatNumber>
                 <StatHelpText>Jesus, C.A. - Factura 3664 </StatHelpText>
             </Stat>
