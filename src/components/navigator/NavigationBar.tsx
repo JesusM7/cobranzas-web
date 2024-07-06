@@ -8,6 +8,7 @@ import { GiPowderBag } from "react-icons/gi";
 import { IoSettingsSharp } from "react-icons/io5";
 import TodayExchangeRate from "./TodayExchangeRate";
 import DocumentsMenu from "./DocumentsMenu";
+import { BsCash } from "react-icons/bs";
 
 export default function NavigationBar() {
 
@@ -22,7 +23,12 @@ export default function NavigationBar() {
                 <Button color='white' variant={'navigation_ghost'} leftIcon={<Icon as={MdHome} />}>Inicio</Button>
             </Link>
             <Divider orientation="vertical" />
-            <PaymentMenu />
+            <Link to='/pagos'>
+                <Button
+                    colorScheme="secondary"
+                    variant={pathname === '/clientes' ? 'navigation' : 'navigation_ghost'}
+                    paddingX={'5px'} leftIcon={<Icon as={BsCash} />}>Pagos</Button>
+            </Link>
             <Divider orientation="vertical" />
             {/* <Button paddingX={'5px'} leftIcon={<Icon as={MdAccountBalanceWallet} />} color='white' variant={'navigation_ghost'}>Documentos</Button> */}
             <DocumentsMenu />

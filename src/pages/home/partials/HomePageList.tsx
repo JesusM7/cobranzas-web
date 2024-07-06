@@ -24,7 +24,7 @@ export default function HomePageList() {
      <Table variant={'striped'}>
         <Thead>
             <Tr>
-                <Th>Número</Th>
+                <Th>Factura</Th>
                 <Th>Cliente</Th>
                 <Th>Monto USD</Th>
                 <Th>Abono USD</Th>
