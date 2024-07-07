@@ -11,27 +11,23 @@ export default function InvoiceInfo({ invoice }: { invoice: Invoice }) {
                     <Text color='secondary.500' fontSize={'md'}>Información de la factura</Text>
                 </Th>
             </Thead>
+            <Thead>
+                <Tr>
+                <Th fontWeight={'bold'}>Numero</Th>
+                <Th fontWeight={'bold'}>Cliente</Th>
+                <Th fontWeight={'bold'}>F. Emisión</Th>
+                <Th fontWeight={'bold'}>Monto</Th>
+                <Th fontWeight={'bold'}>Monto pendiente</Th>
+                </Tr>
+            </Thead>
             <Tbody>
                 <Tr>
-                    <Td fontWeight={'bold'}>Numero</Td>
                     <Td>{invoice.number}</Td>
-                </Tr>
-                <Tr>
-                    <Td fontWeight={'bold'}>Cliente</Td>
                     <Td>{invoice.client.name}</Td>
-                </Tr>
-                <Tr>
-                    <Td fontWeight={'bold'}>F. Emisión</Td>
                     <Td>{moment(invoice.date).format('DD-MM-YYYY')}</Td>
-                </Tr>
-                <Tr>
-                    <Td fontWeight={'bold'}>Monto</Td>
                     <Td>
                         <Tag colorScheme='teal'>{invoice.amountUsd} USD</Tag>
                     </Td>
-                </Tr>
-                <Tr>
-                    <Td fontWeight={'bold'}>Monto pendiente</Td>
                     <Td>
                         <InvoicePendingAmount amount={invoice.amountUsd} charged={invoice.charged} />
                     </Td>

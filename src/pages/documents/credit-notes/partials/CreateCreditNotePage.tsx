@@ -61,12 +61,12 @@ export default function CreateCreditNotePage({ initialValues }: { initialValues?
 
 
     return <Box paddingX={'5%'} paddingY={'2.5%'}>
-        <Text color='secondary.500' fontWeight={'bold'} fontSize={'xx-large'}>Crear Nota de Crédito</Text>
+        <Text color='secondary.500' fontWeight={'bold'} fontSize={'Ls'}>CREAR NOTA DE CRÉDITO</Text>
         <form onSubmit={formik.handleSubmit}>
             <Grid templateColumns={'repeat(12,1fr)'} gap={'10px'} marginY={'3%'}>
-                <GridItem colSpan={3}>
+                <GridItem colSpan={6}>
                     <FormControl id='number' isInvalid={!!formik.errors.number} >
-                        <FormLabel as='legend'>Número de nota de crédito</FormLabel>
+                        <FormLabel as='legend'>N° Nota crédito</FormLabel>
                         <NumberInput defaultValue={0}>
                             <NumberInputField
                                 value={formik.values.number}
@@ -76,14 +76,7 @@ export default function CreateCreditNotePage({ initialValues }: { initialValues?
                         <FormErrorMessage>{formik.errors.number}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
-                <GridItem colSpan={3}>
-                    <FormControl isInvalid={!!formik.errors.invoiceId}>
-                        <FormLabel as='legend'>Número de factura</FormLabel>
-                        <InvoiceSelect onChange={formik.handleChange} name="invoiceId" value={formik.values.invoiceId} />
-                        <FormErrorMessage>{formik.errors.invoiceId}</FormErrorMessage>
-                    </FormControl>
-                </GridItem>
-                <GridItem colSpan={4}>
+                <GridItem colSpan={6}>
                     <FormControl isInvalid={!!formik.errors.date} >
                         <FormLabel as='legend'>Fecha de Emisión</FormLabel>
                         <Input
@@ -95,7 +88,7 @@ export default function CreateCreditNotePage({ initialValues }: { initialValues?
                         <FormErrorMessage>{formik.errors.date}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
-                <GridItem colSpan={4}>
+                <GridItem colSpan={10}>
                     <FormControl>
                         <FormLabel as='legend'>Tasa de cambio</FormLabel>
                         <NumberInput defaultValue={formik.values.exchangeRate}>
@@ -107,7 +100,7 @@ export default function CreateCreditNotePage({ initialValues }: { initialValues?
                         <FormErrorMessage>{formik.errors.exchangeRate}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
-                <GridItem colSpan={4}>
+                <GridItem colSpan={6}>
                     <FormControl isInvalid={!!formik.errors.amountUsd} >
                         <FormLabel as='legend'>Monto USD</FormLabel>
                         <NumberInput
@@ -125,7 +118,7 @@ export default function CreateCreditNotePage({ initialValues }: { initialValues?
                         <FormErrorMessage>{formik.errors.amountUsd}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
-                <GridItem colSpan={4}>
+                <GridItem colSpan={6}>
                     <FormControl isInvalid={!!formik.errors.amountBs} >
                         <FormLabel as='legend'>Monto Bs</FormLabel>
                         <NumberInput

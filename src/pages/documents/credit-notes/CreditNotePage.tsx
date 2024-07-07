@@ -3,7 +3,7 @@ import { MdAdd } from "react-icons/md";
 import { Link } from "react-router-dom";
 import CreditNotelist from "./partials/CreditNoteList";
 
-export default function InvoicePage() {
+export default function CreditNotePage() {
     return <Box>
         <Stack>
             <Flex p='20px' alignItems={'center'}>

@@ -2,8 +2,7 @@ import { Card, Flex } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import useInvoice from "../../../../hooks/useInvoice";
 import InvoiceInfo from "./partials/InvoiceInfo";
-import ChargesList from "./partials/ChargesList";
-import CreateCharges from "./partials/CreateCharge";
+import ChargesOptions from "./partials/ChargesOptions";
 
 export default function ChargesPage() {
 
@@ -15,16 +14,13 @@ export default function ChargesPage() {
     }
 
     return (
-        <Flex flexDir={'row'} gap='10px' padding={'10px'}>
-            <Card w='33.33%'>
+        <Flex flexDir={'column'} gap='10px' padding={'10px'}>
+            <Card>
                 <InvoiceInfo invoice={invoice} />
             </Card>
-            <Card w='33.33%'>
-                <ChargesList invoice={invoice} />
-            </Card>
-            <Card w='33.33%'>
-                <CreateCharges invoiceNumber={invoice.number}/>
-            </Card>
+           <Card>
+            <ChargesOptions/>
+           </Card>
         </Flex>
     )
 }

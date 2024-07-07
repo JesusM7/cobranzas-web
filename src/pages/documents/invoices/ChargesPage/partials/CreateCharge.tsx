@@ -61,7 +61,7 @@ export default function CreateCharges({ initialValues, invoiceNumber}: { invoice
     }, [exchangeRate]);
 
     return <Box paddingX={'5%'} paddingY={'2.5%'}>
-        <Text color='secondary.500' fontSize={'ls'} fontWeight={600} >CARGAR ABONO</Text>
+        <Text color='secondary.500' fontSize={'ls'} fontWeight={"bold"} >CARGAR ABONO</Text>
         <form onSubmit={formik.handleSubmit}>
             <Grid templateColumns={'repeat(12,1fr)'} gap={'10px'} marginY={'3%'}>
                 <GridItem colSpan={6}>
