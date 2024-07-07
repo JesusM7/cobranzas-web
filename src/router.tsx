@@ -14,6 +14,8 @@ import ExchangeRateList from "./pages/enchange-rate/ExchangeRateList";
 import InvoicePage from "./pages/documents/invoices/InvoicePage";
 import CreateInvoicePage from "./pages/documents/invoices/partials/CreateInvoicePage";
 import ChargesPage from "./pages/documents/invoices/ChargesPage/ChargesPage";
+import CreateCreditNotePage from "./pages/documents/credit-notes/partials/CreateCreditNotePage";
+import CreditNotePage from "./pages/documents/credit-notes/CreditNotePage";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -79,9 +81,17 @@ export const router = createBrowserRouter(
                         <CreateInvoicePage />
                     </ProtectedRoute>
                 } />
+            <Route path="crear-nota-de-credito" element={
+                    <ProtectedRoute>
+                        <CreateCreditNotePage/>
+                    </ProtectedRoute>
+                } />
+             <Route path="notas-de-credito" element={
+                    <ProtectedRoute>
+                        <CreditNotePage/>
+                    </ProtectedRoute>
+                } />
             </Route>
-
-
             <Route path="/login" element={<LoginPage />} />
         </>,
     )
