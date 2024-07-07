@@ -6,7 +6,7 @@ export default function ExtraInfoHomePage(){
 
         <Card >
             <Stat padding={'15px'}>
-                <StatLabel  fontWeight={600} >Mayor monto por cobrar</StatLabel>
+                <StatLabel  fontWeight={600} >Monto mas alto por cobrar</StatLabel>
                 <StatNumber color={"green"}>154 USD</StatNumber>
                 <StatHelpText>Jesús, C.A. - Factura 3664</StatHelpText>
             </Stat>
