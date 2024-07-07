@@ -2,6 +2,7 @@ import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import useInvoices from "../../../../hooks/useInvoices";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import InvoiceStatus from "../../../../components/InvoiceStatus";
 
 
 export default function InvoiceList() {
@@ -19,10 +20,11 @@ export default function InvoiceList() {
                 <Th>Número</Th>
                 <Th>Cliente</Th>
                 <Th>Monto USD</Th>
-                <Th>Abono USD</Th>
+                <Th>Abonado USD</Th>
                 <Th>Fecha de Emisión</Th>
                 <Th>Fecha de Vencimiento</Th>
                 <Th>Vendedor</Th>
+                <Th>Status</Th>
                 <Th>Observación</Th>
             </Tr>
         </Thead>
@@ -35,11 +37,12 @@ export default function InvoiceList() {
                 }} key={invoice.id} onClick={() => navigate(`/facturas/${invoice.number}/abonos`)}>
                     <Td>{invoice.number}</Td>
                     <Td>{invoice.client.name}</Td>
-                    <Td>{invoice.amountUsd}</Td>
-                    <Td>-</Td>
+                    <Td>USD {invoice.amountUsd}</Td>
+                    <Td>USD {invoice.charged}</Td>
                     <Td>{moment(invoice.date).format('DD-MM-YYYY')}</Td>
                     <Td>{moment(invoice.expirationDate).format('DD-MM-YYYY')}</Td>
                     <Td>{invoice.seller.name}</Td>
+                    <Td>{<InvoiceStatus status={invoice.status} />}</Td>
                     <Td>{invoice.observation}</Td>
                 </Tr>
             ))}

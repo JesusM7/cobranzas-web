@@ -27,7 +27,7 @@ export type Document = {
     seller: Seller;
     amountUsd: number;
     amountBs: number;
-    status: string;
+    status: DocumentStatus;
     correlation?: string;
     observation?: string;
 }
@@ -37,4 +37,16 @@ export type Invoice = Document & {
     creditDays: number;
     charges: any[];
     charged: number;
+}
+
+export enum DocumentStatus {
+    PAID = "PAID",
+    PENDING = "PENDING",
+    CANCELED = "CANCELED",
+}
+
+export enum DocumentTypes {
+    INVOICE = '1',
+    CREDIT_NOTE = '2',
+    DEBIT_NOTE = '3',
 }
