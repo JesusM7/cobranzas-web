@@ -1,8 +1,9 @@
 import { Button, Icon, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import { MdAdd } from "react-icons/md";
 import CreateCreditNotePage, { CreateCreditNoteValues } from "./CreateCreditNotePage";
+import { Invoice } from "../../../../hooks/useInvoices";
 
-export default function CreateCreditNoteModal({ initialValues }: { initialValues?: CreateCreditNoteValues }) {
+export default function CreateCreditNoteModal({ initialValues, invoice }: { invoice: Invoice, initialValues?: CreateCreditNoteValues }) {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -16,7 +17,7 @@ export default function CreateCreditNoteModal({ initialValues }: { initialValues
                     <ModalHeader>Crear una nota de crédito</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <CreateCreditNotePage initialValues={initialValues}/>
+                        <CreateCreditNotePage initialValues={initialValues} invoice={invoice.id} />
                     </ModalBody>
                 </ModalContent>
             </Modal>

@@ -1,7 +1,7 @@
 import useQuery from "./useQuery"
 
 
-export default function UseCreditNote() {
+export default function useCreditNote() {
 
     const { data, error, loading } = useQuery<CreditNote[]>({
         endpoint: '/api/v1/credit-note',

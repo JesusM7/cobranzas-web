@@ -12,7 +12,7 @@ export default function ChargesList({ invoice }: { invoice: Invoice }) {
                 <Text color='secondary.500' fontSize={'md'}>Listado de Abonos</Text>
             </Th>
             <Th>
-                <CreateChargesModal invoiceNumber={invoice.number} />
+                <CreateChargesModal invoice={invoice} />
             </Th>
         </Thead>
         <Thead>

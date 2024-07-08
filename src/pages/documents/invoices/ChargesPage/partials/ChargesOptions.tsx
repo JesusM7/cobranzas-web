@@ -19,10 +19,10 @@ export default function ChargesOptions() {
             <ChargesList invoice={invoice} />
         </Card>
         <Card w='33.33%'>
-            <CreditNotelist />
+            <CreditNotelist invoice={invoice} />
         </Card>
         <Card w='33.33%'>
-            <CreateCreditNotePage/>
+            <CreateCreditNotePage invoice={invoice}/>
         </Card>
     </Flex>
 }

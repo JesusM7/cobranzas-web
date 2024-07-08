@@ -5,8 +5,9 @@ import useSaveCharges from "../../../../../hooks/useSaveCharges";
 import { useLatestExchangeRate } from "../../../../../hooks/useExchangeRate";
 import moment from "moment";
 import { useEffect } from "react";
+import { Invoice } from "../../../../../hooks/useInvoices";
 
-export default function CreateCharges({ initialValues, invoiceNumber}: { invoiceNumber: number,  initialValues?: CreateCharge }) {
+export default function CreateCharges({ initialValues, invoice }: { invoice: Invoice, initialValues?: CreateCharge }) {
 
 
     const { saveCharges, loading, error } = useSaveCharges();
@@ -22,10 +23,10 @@ export default function CreateCharges({ initialValues, invoiceNumber}: { invoice
             ref: "",
             bank: Bank.BANESCO,
             status: ChargeStatus.PENDING,
-            invoiceNumber,
+            invoiceNumber: invoice.number,
             observation: "",
         },
-        validate: validateCreateChargesForm,
+        validate: (values) => validateCreateChargesForm(values, invoice),
         validateOnChange: true,
         onSubmit: async (values) => {
             await saveCharges(values);
@@ -68,6 +69,7 @@ export default function CreateCharges({ initialValues, invoiceNumber}: { invoice
                     <FormControl id='rif' isInvalid={!!formik.errors.amount} >
                         <FormLabel as='legend'>Monto USD</FormLabel>
                         <NumberInput
+                            max={invoice.amountUsd - invoice.charged}
                             onChange={(_, valueAsNumber) => formik.setFieldValue('amount', valueAsNumber || 0)}
                             defaultValue={formik.values.amount}
                             value={formik.values.amount}
@@ -176,7 +178,7 @@ export default function CreateCharges({ initialValues, invoiceNumber}: { invoice
     </Box>
 }
 
-export type CreateCharge= {
+export type CreateCharge = {
     amount: number;
     amountBs: number;
     date: string;
@@ -188,6 +190,29 @@ export type CreateCharge= {
     observation?: string;
 }
 
-function validateCreateChargesForm(values:CreateCharge) {
-    return undefined
+function validateCreateChargesForm(values: CreateCharge, invoice: Invoice) {
+    if (!values.amount) {
+        return { amount: "El monto es requerido" };
+    }
+    if (values.amount <= 0) {
+        return { amount: "El monto debe ser mayor a 0" };
+    }
+    if (values.amount > (invoice.amountUsd - invoice.charged)) {
+        return { amount: "El monto debe ser menor o igual al total por abonar" };
+    }
+    if (values.amountBs <= 0) {
+        return { amountBs: "El monto en Bs no puede ser menor a 0" };
+    }
+    if (values.exchangeRate <= 0) {
+        return { exchangeRate: "la tasa de cambio no puede ser 0" };
+    }
+    if (!values.date) {
+        return { date: "Ingrese una fecha valida" };
+    }
+    if (!values.invoiceNumber) {
+        return { invoiceNumber: "Ingrese el número de la factura" };
+    }
+    if (values.invoiceNumber <= 0) {
+        return { invoiceNumber: "EL número de factura no puede ser negativo" };
+    }
 }

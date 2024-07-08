@@ -1,13 +1,14 @@
-import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Table, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
-import UseCreditNote from "../../../../hooks/useCreditNote";
+import useCreditNote from "../../../../hooks/useCreditNote";
 import CreateCreditNoteModal from "./CreateCreditNoteModal";
+import { Invoice } from "../../../../hooks/useInvoices";
 
 
-export default function CreditNotelist() {
+export default function CreditNotelist({ invoice }: { invoice: Invoice }) {
 
-    const { creditNote, loading } = UseCreditNote()
+    const { creditNote, loading } = useCreditNote()
     const navigate = useNavigate()
 
     if (loading) {
@@ -16,8 +17,11 @@ export default function CreditNotelist() {
 
     return <Table variant={'striped'} size={"sm"}>
         <Thead>
+            <Th colSpan={3}>
+                <Text color='secondary.500' fontSize={'md'}>Notas de crédito</Text>
+            </Th>
             <Th>
-                <CreateCreditNoteModal/>
+                <CreateCreditNoteModal invoice={invoice} />
             </Th>
         </Thead>
         <Thead>

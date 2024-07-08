@@ -1,13 +1,12 @@
 import { Box, Button, FormControl, FormErrorMessage, FormLabel, Grid, GridItem, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, Text, useToast } from "@chakra-ui/react";
 import { isNaN, useFormik } from "formik";
-import ClientSelect from "../../../../components/ClientSelect";
 import moment from "moment";
 import { useLatestExchangeRate } from "../../../../hooks/useExchangeRate";
 import { useEffect } from "react";
 import useSaveCreditNote from "../../../../hooks/useSaveCreditNote";
-import InvoiceSelect from "../../../../components/InvoiceSelect";
+import { Invoice } from "../../../../hooks/useInvoices";
 
-export default function CreateCreditNotePage({ initialValues }: { initialValues?: CreateCreditNoteValues }) {
+export default function CreateCreditNotePage({ initialValues, invoice }: { invoice: Invoice, initialValues?: CreateCreditNoteValues }) {
 
     const { saveCreditNote, loading, error } = useSaveCreditNote();
     const toast = useToast();
@@ -15,7 +14,7 @@ export default function CreateCreditNotePage({ initialValues }: { initialValues?
 
     const formik = useFormik<CreateCreditNoteValues>({
         initialValues: initialValues || {
-            invoiceId: "",
+            invoiceId: invoice.id,
             number: 0,
             date: moment().format('YYYY-MM-DD'),
             amountUsd: 0,
@@ -170,13 +169,9 @@ function validateCreateClientForm(values: CreateCreditNoteValues) {
     if (!values.number) {
         return { number: "El N° de Nota de crédito es requerido" };
     }
-    if (!values.invoiceId) {
-        return { number: "El N° de factura asociada es requerido" };
-    }
     if (!values.exchangeRate) {
         return { exchangeRate: "Debe ingresar una tasa de cambio" };
     }
-    
     if (values.exchangeRate < 0) {
         return { exchangeRate: "Debe ingresar una tasa mayor a 0" };
     }
