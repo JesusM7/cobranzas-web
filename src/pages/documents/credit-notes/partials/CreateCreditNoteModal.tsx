@@ -17,7 +17,7 @@ export default function CreateCreditNoteModal({ initialValues, invoice }: { invo
                     <ModalHeader>Crear una nota de crédito</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <CreateCreditNotePage initialValues={initialValues} invoice={invoice.id} />
+                        <CreateCreditNotePage initialValues={initialValues} invoice={invoice} />
                     </ModalBody>
                 </ModalContent>
             </Modal>
