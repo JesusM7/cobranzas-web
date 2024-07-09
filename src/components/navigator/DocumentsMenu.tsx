@@ -12,7 +12,6 @@ export default function DocumentsMenu() {
         </MenuButton>
         <MenuList>
             <MenuItem to={"/facturas"} as={Link}> Facturas </MenuItem>
-            <MenuItem> Notas de Debito </MenuItem>
         </MenuList>
     </Menu>
 }
