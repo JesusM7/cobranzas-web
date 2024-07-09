@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormErrorMessage, FormLabel, Grid, GridItem, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text, useToast } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormErrorMessage, FormLabel, Grid, GridItem, Input, Text, useToast } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import useSaveSeller from "../../hooks/useSaveSeller";
 
