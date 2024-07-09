@@ -14,6 +14,7 @@ import ExchangeRateList from "./pages/enchange-rate/ExchangeRateList";
 import InvoicePage from "./pages/documents/invoices/InvoicePage";
 import CreateInvoicePage from "./pages/documents/invoices/partials/CreateInvoicePage";
 import ChargesPage from "./pages/documents/invoices/ChargesPage/ChargesPage";
+import DebitNotePage from "./pages/documents/debit-notes/DebitNotePage";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -77,6 +78,11 @@ export const router = createBrowserRouter(
                 <Route path="crear-factura" element={
                     <ProtectedRoute>
                         <CreateInvoicePage />
+                    </ProtectedRoute>
+                } />
+                <Route path="notas-de-debito" element={
+                    <ProtectedRoute>
+                        <DebitNotePage />
                     </ProtectedRoute>
                 } />
             </Route>

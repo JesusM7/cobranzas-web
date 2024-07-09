@@ -3,16 +3,16 @@ import { isNaN, useFormik } from "formik";
 import moment from "moment";
 import { useLatestExchangeRate } from "../../../../hooks/useExchangeRate";
 import { useEffect } from "react";
-import useSaveCreditNote from "../../../../hooks/useSaveCreditNote";
 import { Invoice } from "../../../../hooks/useInvoices";
+import useSaveDebitNote from "../../../../hooks/useSaveDebitNote";
 
-export default function CreateCreditNotePage({ initialValues, invoice }: { invoice: Invoice, initialValues?: CreateCreditNoteValues }) {
+export default function CreateDebitNotePage({ initialValues, invoice }: { invoice: Invoice, initialValues?: CreateDebitNoteValues }) {
 
-    const { saveCreditNote, loading, error } = useSaveCreditNote();
+    const { saveDebitNote, loading, error } = useSaveDebitNote();
     const toast = useToast();
     const { exchangeRate } = useLatestExchangeRate();
 
-    const formik = useFormik<CreateCreditNoteValues>({
+    const formik = useFormik<CreateDebitNoteValues>({
         initialValues: initialValues || {
             invoiceId: invoice.id,
             number: 0,
@@ -25,10 +25,10 @@ export default function CreateCreditNotePage({ initialValues, invoice }: { invoi
         validate: validateCreateClientForm,
         validateOnChange: true,
         onSubmit: async (values) => {
-            await saveCreditNote(values);
+            await saveDebitNote(values);
             toast({
-                title: error ? 'Error al crear la Nota de crédito' : "Nota de crédito creada",
-                description: error ? 'La Nota de crédito no pudo ser creada' : "La Nota de crédito fue creada exitosamente",
+                title: error ? 'Error al crear la Nota de débito' : "Nota de débito creada",
+                description: error ? 'La Nota de débito no pudo ser creada' : "La Nota de débito fue creada exitosamente",
                 status: error ? 'error' : "success",
                 duration: 5000,
                 isClosable: true,
@@ -60,12 +60,12 @@ export default function CreateCreditNotePage({ initialValues, invoice }: { invoi
 
 
     return <Box paddingX={'5%'} paddingY={'2.5%'}>
-        <Text color='secondary.500' fontWeight={'bold'} fontSize={'Ls'}>CREAR NOTA DE CRÉDITO</Text>
+        <Text color='secondary.500' fontWeight={'bold'} fontSize={'Ls'}>CREAR NOTA DE DÉBITO</Text>
         <form onSubmit={formik.handleSubmit}>
             <Grid templateColumns={'repeat(12,1fr)'} gap={'10px'} marginY={'3%'}>
                 <GridItem colSpan={6}>
                     <FormControl id='number' isInvalid={!!formik.errors.number} >
-                        <FormLabel as='legend'>N° Nota crédito</FormLabel>
+                        <FormLabel as='legend'>N° Nota débito</FormLabel>
                         <NumberInput defaultValue={0}>
                             <NumberInputField
                                 value={formik.values.number}
@@ -147,14 +147,14 @@ export default function CreateCreditNotePage({ initialValues, invoice }: { invoi
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={12}>
-                    <Button isLoading={loading} colorScheme="secondary" type='submit'>Crear nota de crédito</Button>
+                    <Button isLoading={loading} colorScheme="secondary" type='submit'>Crear nota de débito</Button>
                 </GridItem>
             </Grid>
         </form>
     </Box>
 }
 
-export type CreateCreditNoteValues = {
+export type CreateDebitNoteValues = {
     invoiceId: string,
     number: number;
     date: string;
@@ -164,7 +164,7 @@ export type CreateCreditNoteValues = {
     exchangeRate: number;
 }
 
-function validateCreateClientForm(values: CreateCreditNoteValues) {
+function validateCreateClientForm(values: CreateDebitNoteValues) {
 
     if (!values.number) {
         return { number: "El N° de Nota de crédito es requerido" };
