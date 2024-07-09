@@ -1,14 +1,14 @@
 import { Table, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
-import useCreditNote from "../../../../hooks/useCreditNote";
-import CreateCreditNoteModal from "./CreateCreditNoteModal";
 import { Invoice } from "../../../../hooks/useInvoices";
+import useDebitNote from "../../../../hooks/useDebitNote";
+import CreateDebitNoteModal from "./CreateDebitNoteModal";
 
 
-export default function CreditNotelist({ invoice }: { invoice: Invoice }) {
+export default function DebitNotelist({ invoice }: { invoice: Invoice }) {
 
-    const { creditNote, loading } = useCreditNote()
+    const { debitNote, loading } = useDebitNote()
     const navigate = useNavigate()
 
     if (loading) {
@@ -18,10 +18,10 @@ export default function CreditNotelist({ invoice }: { invoice: Invoice }) {
     return <Table variant={'striped'} size={"sm"}>
         <Thead>
             <Th colSpan={3}>
-                <Text color='secondary.500' fontSize={'md'}>Notas de crédito</Text>
+                <Text color='secondary.500' fontSize={'md'}>Notas de débito</Text>
             </Th>
             <Th>
-                <CreateCreditNoteModal invoice={invoice} />
+                <CreateDebitNoteModal invoice={invoice} />
             </Th>
         </Thead>
         <Thead>
@@ -33,12 +33,12 @@ export default function CreditNotelist({ invoice }: { invoice: Invoice }) {
             </Tr>
         </Thead>
         <Tbody>
-            {creditNote.map(creditNote => (
-                <Tr key={creditNote.id}>
-                    <Td>{creditNote.number}</Td>
-                    <Td>{creditNote.amountUsd}</Td>
-                    <Td>{moment(creditNote.date).format('DD-MM-YYYY')}</Td>
-                    <Td>{creditNote.observation}</Td>
+            {debitNote.map(debitNote => (
+                <Tr key={debitNote.id}>
+                    <Td>{debitNote.number}</Td>
+                    <Td>{debitNote.amountUsd}</Td>
+                    <Td>{moment(debitNote.date).format('DD-MM-YYYY')}</Td>
+                    <Td>{debitNote.observation}</Td>
                 </Tr>
             ))}
         </Tbody>
