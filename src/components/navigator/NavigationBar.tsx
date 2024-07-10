@@ -1,6 +1,5 @@
-import { Box, Button, Divider, Flex, HStack, Icon, Stack, Tag, Text } from "@chakra-ui/react";
+import { Button, Divider, HStack, Icon } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
-import PaymentMenu from "./PaymentMenu";
 import { MdHome } from "react-icons/md";
 import { FaUserCheck } from "react-icons/fa";
 import { FaUsersRectangle } from "react-icons/fa6";
@@ -8,7 +7,6 @@ import { GiPowderBag } from "react-icons/gi";
 import { IoSettingsSharp } from "react-icons/io5";
 import TodayExchangeRate from "./TodayExchangeRate";
 import DocumentsMenu from "./DocumentsMenu";
-import { BsCash } from "react-icons/bs";
 
 export default function NavigationBar() {
 
@@ -57,6 +55,6 @@ export default function NavigationBar() {
             <Divider orientation="vertical" />
             <Button paddingX={'5px'} leftIcon={<Icon as={IoSettingsSharp} />} color='white' variant={'navigation_ghost'}>Configuracion</Button>
         </HStack>
-       <TodayExchangeRate />
+        <TodayExchangeRate />
     </HStack>
 }
