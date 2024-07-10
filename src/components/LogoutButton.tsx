@@ -5,6 +5,6 @@ import useSession from "../hooks/useSession"
 export default function LogoutButton() {
 
     const { logout } = useSession()
-    
-    return <Box onClick={() => logout()} border={"solid red"} width={"100%"}>Cerrar sesion</Box>
+
+    return <Box onClick={() => logout()} width={"100%"}>Cerrar sesión</Box>
 }
