@@ -1,18 +1,17 @@
 import { Card, Flex } from "@chakra-ui/react";
 import ExtraInfoHomePage from "./ExtraInfoHomePage";
 import InvoiceList from "../../documents/invoices/partials/InvoiceList";
+import { DashboardInfo } from "../../../hooks/useDashboardInfo";
 
 
-export default function HomePageList() {
+export default function HomePageList({ dashboard }: { dashboard: DashboardInfo }) {
 
-    return <Flex flexDir={'row'} gap='10px' padding={'5px'}> 
+    return <Flex flexDir={'row'} gap='10px' padding={'5px'}>
 
-    <Card  w={"20%"}>
-        <ExtraInfoHomePage/>
-    </Card>
+        <ExtraInfoHomePage dashboard={dashboard} />
 
-     <Card w={"80%"}>
-    <InvoiceList/>
-     </Card>
- </Flex>
+        <Card boxShadow={'lg'}>
+            <InvoiceList />
+        </Card>
+    </Flex>
 }

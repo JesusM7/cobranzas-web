@@ -4,9 +4,17 @@ import useQuery from "./useQuery"
 
 export default function useDashboardInfo() {
 
-    const { data, error, loading } = useQuery<DashboardInfo[]>({
+    const { data, error, loading } = useQuery<DashboardInfo>({
         endpoint: '/api/v1/dashboard',
-        defaultValue: []
+        defaultValue: {
+            monthlyClients: 0,
+            totalIncome: 0,
+            totalExpiredAmount: 0,
+            totalPendingAmount: 0,
+            totalPendingInvoices: { totalInvoices: 0, totalClients: 0 },
+            higherPendingInvoice: null,
+            olderExpiredInvoice: null
+        }
     })
 
     return {

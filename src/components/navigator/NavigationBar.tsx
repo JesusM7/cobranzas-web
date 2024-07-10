@@ -23,13 +23,13 @@ export default function NavigationBar() {
                 <Button color='white' variant={'navigation_ghost'} leftIcon={<Icon as={MdHome} />}>Inicio</Button>
             </Link>
             <Divider orientation="vertical" />
-            <Link to='/pagos'>
+            {/* <Link to='/pagos'>
                 <Button
                     colorScheme="secondary"
-                    variant={pathname === '/clientes' ? 'navigation' : 'navigation_ghost'}
+                    variant={pathname === '/pagos' ? 'navigation' : 'navigation_ghost'}
                     paddingX={'5px'} leftIcon={<Icon as={BsCash} />}>Pagos</Button>
-            </Link>
-            <Divider orientation="vertical" />
+            </Link> */}
+            {/* <Divider orientation="vertical" /> */}
             {/* <Button paddingX={'5px'} leftIcon={<Icon as={MdAccountBalanceWallet} />} color='white' variant={'navigation_ghost'}>Documentos</Button> */}
             <DocumentsMenu />
             <Divider orientation="vertical" />

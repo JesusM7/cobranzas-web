@@ -1,15 +1,12 @@
 import { Table, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
 import moment from "moment";
-import { useNavigate } from "react-router-dom";
 import { Invoice } from "../../../../hooks/useInvoices";
-import useDebitNote from "../../../../hooks/useDebitNote";
 import CreateDebitNoteModal from "./CreateDebitNoteModal";
-
+import useDebitNotes from "../../../../hooks/useDebitNotes";
 
 export default function DebitNotelist({ invoice }: { invoice: Invoice }) {
 
-    const { debitNote, loading } = useDebitNote()
-    const navigate = useNavigate()
+    const { debitNotes, loading } = useDebitNotes(invoice.id)
 
     if (loading) {
         return <div>Cargando...</div>
@@ -33,7 +30,7 @@ export default function DebitNotelist({ invoice }: { invoice: Invoice }) {
             </Tr>
         </Thead>
         <Tbody>
-            {debitNote.map(debitNote => (
+            {debitNotes.map(debitNote => (
                 <Tr key={debitNote.id}>
                     <Td>{debitNote.number}</Td>
                     <Td>{debitNote.amountUsd}</Td>

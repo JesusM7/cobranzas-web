@@ -1,15 +1,13 @@
 import { Table, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
 import moment from "moment";
-import { useNavigate } from "react-router-dom";
-import useCreditNote from "../../../../hooks/useCreditNote";
 import CreateCreditNoteModal from "./CreateCreditNoteModal";
 import { Invoice } from "../../../../hooks/useInvoices";
+import useCreditNotes from "../../../../hooks/useCreditNotes";
 
 
 export default function CreditNotelist({ invoice }: { invoice: Invoice }) {
 
-    const { creditNote, loading } = useCreditNote()
-    const navigate = useNavigate()
+    const { creditNotes, loading } = useCreditNotes(invoice.id)
 
     if (loading) {
         return <div>Cargando...</div>
@@ -33,7 +31,7 @@ export default function CreditNotelist({ invoice }: { invoice: Invoice }) {
             </Tr>
         </Thead>
         <Tbody>
-            {creditNote.map(creditNote => (
+            {creditNotes.map(creditNote => (
                 <Tr key={creditNote.id}>
                     <Td>{creditNote.number}</Td>
                     <Td>{creditNote.amountUsd}</Td>
