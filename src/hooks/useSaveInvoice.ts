@@ -6,10 +6,12 @@ import { CreateInvoiceValues } from "../pages/documents/invoices/partials/Create
 
 export default function useSaveInvoice() {
     const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
     const { token } = useSession();
 
-    const saveInvoice = async (invoice: CreateInvoiceValues) => {
+    const saveInvoice = async (invoice: CreateInvoiceValues, {
+        onError,
+        onSuccess,
+    }: MutationCallbacks = {}) => {
         setLoading(true);
         try {
             await axios.post(`${config.api}/api/v1/invoices`, invoice, {
@@ -17,9 +19,9 @@ export default function useSaveInvoice() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            setError(null);
+            onSuccess?.();
         } catch (error) {
-            setError("Error al guardar la factura");
+            onError?.("Error al guardar la factura");
         } finally {
             setLoading(false);
         }
@@ -28,7 +30,11 @@ export default function useSaveInvoice() {
     return {
         saveInvoice,
         loading,
-        error,
     }
 
+}
+
+export type MutationCallbacks = {
+    onError?: (error: string) => void;
+    onSuccess?: () => void;
 }

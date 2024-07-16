@@ -11,7 +11,7 @@ import DebouncedInput from "../../../../components/DebouncedInput";
 
 export default function CreateInvoicePage({ initialValues }: { initialValues?: CreateInvoiceValues }) {
 
-    const { saveInvoice, loading, error } = useSaveInvoice();
+    const { saveInvoice, loading } = useSaveInvoice();
     const toast = useToast();
     const { exchangeRate } = useLatestExchangeRate();
 
@@ -31,17 +31,27 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
         validate: validateCreateClientForm,
         validateOnChange: true,
         onSubmit: async (values) => {
-            await saveInvoice(values);
-            toast({
-                title: error ? 'Error al crear la Factura' : "Factura creada",
-                description: error ? 'La factura no pudo ser creada' : "La factura fue creada exitosamente",
-                status: error ? 'error' : "success",
-                duration: 5000,
-                isClosable: true,
+            await saveInvoice(values, {
+                onError(error) {
+                    toast({
+                        title: 'Error al crear la factura',
+                        description: error,
+                        status: 'error',
+                        duration: 5000,
+                        isClosable: true,
+                    });
+                },
+                onSuccess() {
+                    formik.resetForm();
+                    toast({
+                        title: "Factura creada",
+                        description: "La factura fue creada exitosamente",
+                        status: "success",
+                        duration: 5000,
+                        isClosable: true,
+                    });
+                },
             });
-            if (!error) {
-                formik.resetForm();
-            }
         },
     });
 
