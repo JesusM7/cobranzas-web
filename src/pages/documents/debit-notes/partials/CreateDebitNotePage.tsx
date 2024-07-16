@@ -46,12 +46,12 @@ export default function CreateDebitNotePage({ initialValues, invoice }: { invoic
         formik.setFieldValue('amountBs', isNaN(bs) ? 0 : bs);
     }, [formik.values.exchangeRate, formik.values.amountUsd]);
 
-    useEffect(() => {
+    /* useEffect(() => {
         const bs = formik.values.amountBs;
         const rate = formik.values.exchangeRate;
         const usd = bs / rate;
         formik.setFieldValue('amountUsd', isNaN(usd) ? 0 : usd);
-    }, [formik.values.exchangeRate, formik.values.amountBs]);
+    }, [formik.values.exchangeRate, formik.values.amountBs]); */
 
     useEffect(() => {
         formik.setFieldValue('exchangeRate', exchangeRate?.rate || 0);

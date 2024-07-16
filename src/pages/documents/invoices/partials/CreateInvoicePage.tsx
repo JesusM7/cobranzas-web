@@ -7,6 +7,7 @@ import { PaymentCondition } from "../../../../enums/PaymentCondition";
 import SellerSelect from "../../../../components/SellerSelect";
 import { useLatestExchangeRate } from "../../../../hooks/useExchangeRate";
 import { useEffect } from "react";
+import DebouncedInput from "../../../../components/DebouncedInput";
 
 export default function CreateInvoicePage({ initialValues }: { initialValues?: CreateInvoiceValues }) {
 
@@ -45,21 +46,22 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
     });
 
     useEffect(() => {
-        const usd = formik.values.amountUsd;
-        const rate = formik.values.exchangeRate;
+        const usd = formik.values.amountUsd || 1;
+        const rate = formik.values.exchangeRate || exchangeRate?.rate || 0;
         const bs = usd * rate;
-        formik.setFieldValue('amountBs', isNaN(bs) ? 0 : bs);
+        formik.setFieldValue('amountBs', isNaN(bs) ? 0 : bs.toFixed(2));
     }, [formik.values.exchangeRate, formik.values.amountUsd]);
 
-    useEffect(() => {
-        const bs = formik.values.amountBs;
-        const rate = formik.values.exchangeRate;
-        const usd = bs / rate;
-        formik.setFieldValue('amountUsd', isNaN(usd) ? 0 : usd);
-    }, [formik.values.exchangeRate, formik.values.amountBs]);
+    /*    useEffect(() => {
+            const bs = formik.values.amountBs || 1;
+            const rate = formik.values.exchangeRate || exchangeRate?.rate || 0;
+            const usd = bs / rate;
+            formik.setFieldValue('amountUsd', isNaN(usd) ? 0 : usd.toFixed(2));
+        }, [formik.values.exchangeRate, formik.values.amountBs]); */
 
     useEffect(() => {
-        formik.setFieldValue('exchangeRate', exchangeRate?.rate || 0);
+        const rate = exchangeRate?.rate;
+        formik.setFieldValue('exchangeRate', rate);
     }, [exchangeRate]);
 
 
@@ -144,48 +146,38 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                 <GridItem colSpan={4}>
                     <FormControl>
                         <FormLabel as='legend'>Tasa de cambio</FormLabel>
-                        <NumberInput defaultValue={formik.values.exchangeRate}>
-                            <Input
-                                value={formik.values.exchangeRate}
-                                onChange={(e) => formik.setFieldValue('exchangeRate', Number.parseFloat(e.currentTarget.value))}
-                                name="exchangeRate" />
-                        </NumberInput>
+                        <DebouncedInput
+                            debounceTime={1000}
+                            type="number"
+                            value={formik.values.exchangeRate?.toString() || ''}
+                            onChange={(v) => formik.setFieldValue('exchangeRate', v || '')}
+                            name="exchangeRate" />
                         <FormErrorMessage>{formik.errors.exchangeRate}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={4}>
                     <FormControl isInvalid={!!formik.errors.amountUsd} >
                         <FormLabel as='legend'>Monto USD</FormLabel>
-                        <NumberInput
-                            onChange={(_, valueAsNumber) => formik.setFieldValue('amountUsd', valueAsNumber || 0)}
-                            defaultValue={formik.values.amountUsd}
-                            value={formik.values.amountUsd}
-                            precision={2}
-                            step={0.2}>
-                            <NumberInputField />
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
+                        <DebouncedInput
+                            debounceTime={1000}
+                            name="amountUsd"
+                            type="number"
+                            onChange={(v) => formik.setFieldValue('amountUsd', v || '')}
+                            value={formik.values.amountUsd.toString()}>
+                        </DebouncedInput>
                         <FormErrorMessage>{formik.errors.amountUsd}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={4}>
                     <FormControl isInvalid={!!formik.errors.amountBs} >
                         <FormLabel as='legend'>Monto Bs</FormLabel>
-                        <NumberInput
-                            onChange={(_, valueAsNumber) => formik.setFieldValue('amountBs', valueAsNumber || 0)}
-                            defaultValue={formik.values.amountBs}
-                            value={formik.values.amountBs}
-                            precision={1}
-                            step={0.2}>
-                            <NumberInputField />
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
+                        <DebouncedInput
+                            debounceTime={1000}
+                            name="amountBs"
+                            type="number"
+                            onChange={(v) => formik.setFieldValue('amountBs', v)}
+                            value={formik.values.amountBs.toString()}>
+                        </DebouncedInput>
                         <FormErrorMessage>{formik.errors.amountUsd}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
@@ -243,7 +235,7 @@ function validateCreateClientForm(values: CreateInvoiceValues) {
     if (!values.exchangeRate) {
         return { exchangeRate: "Debe ingresar una tasa de cambio" };
     }
-    
+
     if (values.exchangeRate < 0) {
         return { exchangeRate: "Debe ingresar una tasa mayor a 0" };
     }
@@ -259,7 +251,7 @@ function validateCreateClientForm(values: CreateInvoiceValues) {
     if (values.amountBs < 0) {
         return { amountBs: "Debe ingresar un monto Bs valido" };
     }
-    if (values.creditDays < 0) { 
+    if (values.creditDays < 0) {
         return { creditDays: "Los dias de credito no pueden ser negativos" };
     }
     if (!values.sellerId) {
