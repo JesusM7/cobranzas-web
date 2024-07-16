@@ -26,14 +26,14 @@ export default function HomePageCards({ dashboard }: { dashboard: DashboardInfo 
             <Stat padding={'15px'} >
                 <StatLabel fontSize={"md"} fontWeight={600} >Vencido por cobrar</StatLabel>
                 <StatNumber color={"brown"} >{dashboard.totalExpiredAmount} USD</StatNumber>
-                <StatHelpText>Total vencido por cobrar</StatHelpText>
+                <StatHelpText>Monto total vencido por cobrar</StatHelpText>
             </Stat>
         </Card>
         <Card w='33.33%' bgColor={'pink.100'} color={'pink.800'}>
             <Stat padding={'15px'} >
                 <StatLabel fontSize={"md"} fontWeight={600} >Total por cobrar</StatLabel>
                 <StatNumber color={"pink.800"} >{dashboard.totalPendingAmount} USD</StatNumber>
-                <StatHelpText></StatHelpText>
+                <StatHelpText>Monto total por cobrar</StatHelpText>
             </Stat>
         </Card>
     </Flex>

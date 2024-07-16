@@ -43,19 +43,19 @@ export default function CreateCharges({ initialValues, invoice }: { invoice: Inv
         },
     });
 
-    //  useEffect(() => {
-    //     const usd = formik.values.amount;
-    //     const rate = formik.values.exchangeRate;
-    //     const bs = usd * rate;
-    //     formik.setFieldValue('amountBs', isNaN(bs) ? 0 : bs);
-    // }, [formik.values.exchangeRate, formik.values.amount]);
+     useEffect(() => {
+        const usd = formik.values.amount;
+        const rate = formik.values.exchangeRate;
+        const bs = usd * rate;
+        formik.setFieldValue('amountBs', isNaN(bs) ? 0 : bs);
+    }, [formik.values.exchangeRate, formik.values.amount]);
 
-    // useEffect(() => {
-    //     const bs = formik.values.amountBs;
-    //     const rate = formik.values.exchangeRate;
-    //     const usd = bs / rate;
-    //     formik.setFieldValue('amount', isNaN(usd) ? 0 : usd);
-    // }, [formik.values.exchangeRate, formik.values.amountBs]);
+    useEffect(() => {
+        const bs = formik.values.amountBs;
+        const rate = formik.values.exchangeRate;
+        const usd = bs / rate;
+        formik.setFieldValue('amount', isNaN(usd) ? 0 : usd);
+    }, [formik.values.exchangeRate, formik.values.amountBs]);
 
     useEffect(() => {
         formik.setFieldValue('exchangeRate', exchangeRate?.rate || 0);

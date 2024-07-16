@@ -160,7 +160,7 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                             onChange={(_, valueAsNumber) => formik.setFieldValue('amountUsd', valueAsNumber || 0)}
                             defaultValue={formik.values.amountUsd}
                             value={formik.values.amountUsd}
-                            precision={2}
+                            precision={1}
                             step={0.2}>
                             <NumberInputField />
                             <NumberInputStepper>
