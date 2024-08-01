@@ -6,6 +6,7 @@ import { useLatestExchangeRate } from "../../../../../hooks/useExchangeRate";
 import moment from "moment";
 import { useEffect } from "react";
 import { Invoice } from "../../../../../hooks/useInvoices";
+import DebouncedInput from "../../../../../components/DebouncedInput";
 
 export default function CreateCharges({ initialValues, invoice }: { invoice: Invoice, initialValues?: CreateCharge }) {
 
@@ -68,37 +69,24 @@ export default function CreateCharges({ initialValues, invoice }: { invoice: Inv
                 <GridItem colSpan={6}>
                     <FormControl id='rif' isInvalid={!!formik.errors.amount} >
                         <FormLabel as='legend'>Monto USD</FormLabel>
-                        <NumberInput
-                            max={invoice.amountUsd - invoice.charged}
-                            onChange={(_, valueAsNumber) => formik.setFieldValue('amount', valueAsNumber || 0)}
-                            defaultValue={formik.values.amount}
-                            value={formik.values.amount}
-                            precision={2}
-                            step={0.2}>
-                            <NumberInputField />
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
+                            <DebouncedInput
+                            debounceTime={250}
+                            name="amount"
+                            type="number"
+                            onChange={(v) => formik.setFieldValue('amount', v)}
+                            value={formik.values.amount.toString()}/>
                         <FormErrorMessage>{formik.errors.amount}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={6}>
                     <FormControl id='rif' isInvalid={!!formik.errors.amountBs} >
                         <FormLabel as='legend'>Monto BS</FormLabel>
-                        <NumberInput
-                            onChange={(_, valueAsNumber) => formik.setFieldValue('amountBs', valueAsNumber || 0)}
-                            defaultValue={formik.values.amountBs}
-                            value={formik.values.amountBs}
-                            precision={2}
-                            step={0.2}>
-                            <NumberInputField />
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
+                        <DebouncedInput
+                            debounceTime={250}
+                            name="amountBs"
+                            type="number"
+                            onChange={(v) => formik.setFieldValue('amountBs', v)}
+                            value={formik.values.amountBs.toString()}/>
                         <FormErrorMessage>{formik.errors.amountBs}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
@@ -117,12 +105,12 @@ export default function CreateCharges({ initialValues, invoice }: { invoice: Inv
                 <GridItem colSpan={6}>
                     <FormControl>
                         <FormLabel as='legend'>Tasa de cambio</FormLabel>
-                        <NumberInput defaultValue={formik.values.exchangeRate}>
-                            <Input
-                                value={formik.values.exchangeRate}
-                                onChange={(e) => formik.setFieldValue('exchangeRate', Number.parseFloat(e.currentTarget.value))}
-                                name="exchangeRate" />
-                        </NumberInput>
+                        <DebouncedInput
+                            debounceTime={250}
+                            type="number"
+                            value={formik.values.exchangeRate?.toString() || ''}
+                            onChange={(v) => formik.setFieldValue('exchangeRate', v || '')}
+                            name="exchangeRate" />
                         <FormErrorMessage>{formik.errors.exchangeRate}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
@@ -147,16 +135,6 @@ export default function CreateCharges({ initialValues, invoice }: { invoice: Inv
                             name="ref"
                         />
                         <FormErrorMessage>{formik.errors.ref}</FormErrorMessage>
-                    </FormControl>
-                </GridItem>
-                <GridItem colSpan={6}>
-                    <FormControl isInvalid={!!formik.errors.status}>
-                        <FormLabel as='legend'>Estatus</FormLabel>
-                        <Select value={formik.values.status} onChange={formik.handleChange} name='status'>
-                            <option value={ChargeStatus.PAID}>PAGADO</option>
-                            <option value={ChargeStatus.PENDING}>PENDIENTE</option>
-                        </Select>
-                        <FormErrorMessage>{formik.errors.status}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={12}>

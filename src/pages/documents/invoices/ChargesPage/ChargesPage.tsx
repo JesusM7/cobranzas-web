@@ -15,7 +15,7 @@ export default function ChargesPage() {
 
     return (
         <Flex flexDir={'column'} gap='10px' padding={'10px'}>
-            <Card>
+            <Card paddingBottom={"20px"}>
                 <InvoiceInfo invoice={invoice} />
             </Card>
            <Card>

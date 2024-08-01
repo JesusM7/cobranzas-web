@@ -14,7 +14,7 @@ export default function ChargesOptions() {
         return <span>Cargando...</span>
     }
      return <Flex>
-        <Card w='33.33%' >
+        <Card w='33.33%'>
             <ChargesList invoice={invoice} />
         </Card>
         <Card w='33.33%'>
