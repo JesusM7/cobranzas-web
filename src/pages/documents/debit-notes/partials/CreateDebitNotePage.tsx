@@ -5,6 +5,7 @@ import { useLatestExchangeRate } from "../../../../hooks/useExchangeRate";
 import { useEffect } from "react";
 import { Invoice } from "../../../../hooks/useInvoices";
 import useSaveDebitNote from "../../../../hooks/useSaveDebitNote";
+import DebouncedInput from "../../../../components/DebouncedInput";
 
 export default function CreateDebitNotePage({ initialValues, invoice }: { invoice: Invoice, initialValues?: CreateDebitNoteValues }) {
 
@@ -90,48 +91,36 @@ export default function CreateDebitNotePage({ initialValues, invoice }: { invoic
                 <GridItem colSpan={10}>
                     <FormControl>
                         <FormLabel as='legend'>Tasa de cambio</FormLabel>
-                        <NumberInput defaultValue={formik.values.exchangeRate}>
-                            <Input
-                                value={formik.values.exchangeRate}
-                                onChange={(e) => formik.setFieldValue('exchangeRate', Number.parseFloat(e.currentTarget.value))}
-                                name="exchangeRate" />
-                        </NumberInput>
+                        <DebouncedInput
+                            debounceTime={250}
+                            type="number"
+                            value={formik.values.exchangeRate?.toString() || ''}
+                            onChange={(v) => formik.setFieldValue('exchangeRate', v || '')}
+                            name="exchangeRate" />
                         <FormErrorMessage>{formik.errors.exchangeRate}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={6}>
                     <FormControl isInvalid={!!formik.errors.amountUsd} >
                         <FormLabel as='legend'>Monto USD</FormLabel>
-                        <NumberInput
-                            onChange={(_, valueAsNumber) => formik.setFieldValue('amountUsd', valueAsNumber || 0)}
-                            defaultValue={formik.values.amountUsd}
-                            value={formik.values.amountUsd}
-                            precision={2}
-                            step={0.2}>
-                            <NumberInputField />
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
+                        <DebouncedInput
+                            debounceTime={250}
+                            name="amountUsd"
+                            type="number"
+                            onChange={(v) => formik.setFieldValue('amountUsd', v)}
+                            value={formik.values.amountUsd.toString()}/>
                         <FormErrorMessage>{formik.errors.amountUsd}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
                 <GridItem colSpan={6}>
                     <FormControl isInvalid={!!formik.errors.amountBs} >
                         <FormLabel as='legend'>Monto Bs</FormLabel>
-                        <NumberInput
-                            onChange={(_, valueAsNumber) => formik.setFieldValue('amountBs', valueAsNumber || 0)}
-                            defaultValue={formik.values.amountBs}
-                            value={formik.values.amountBs}
-                            precision={1}
-                            step={0.2}>
-                            <NumberInputField />
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
+                        <DebouncedInput
+                            debounceTime={250}
+                            name="amountBs"
+                            type="number"
+                            onChange={(v) => formik.setFieldValue('amountBs', v)}
+                            value={formik.values.amountBs.toString()}/>
                         <FormErrorMessage>{formik.errors.amountUsd}</FormErrorMessage>
                     </FormControl>
                 </GridItem>

@@ -157,7 +157,7 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                     <FormControl>
                         <FormLabel as='legend'>Tasa de cambio</FormLabel>
                         <DebouncedInput
-                            debounceTime={1000}
+                            debounceTime={250}
                             type="number"
                             value={formik.values.exchangeRate?.toString() || ''}
                             onChange={(v) => formik.setFieldValue('exchangeRate', v || '')}
@@ -169,12 +169,11 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                     <FormControl isInvalid={!!formik.errors.amountUsd} >
                         <FormLabel as='legend'>Monto USD</FormLabel>
                         <DebouncedInput
-                            debounceTime={1000}
+                            debounceTime={250}
                             name="amountUsd"
                             type="number"
                             onChange={(v) => formik.setFieldValue('amountUsd', v || '')}
-                            value={formik.values.amountUsd.toString()}>
-                        </DebouncedInput>
+                            value={formik.values.amountUsd.toString()} />
                         <FormErrorMessage>{formik.errors.amountUsd}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
@@ -182,12 +181,11 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                     <FormControl isInvalid={!!formik.errors.amountBs} >
                         <FormLabel as='legend'>Monto Bs</FormLabel>
                         <DebouncedInput
-                            debounceTime={1000}
+                            debounceTime={250}
                             name="amountBs"
                             type="number"
                             onChange={(v) => formik.setFieldValue('amountBs', v)}
-                            value={formik.values.amountBs.toString()}>
-                        </DebouncedInput>
+                            value={formik.values.amountBs.toString()}/>
                         <FormErrorMessage>{formik.errors.amountUsd}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
