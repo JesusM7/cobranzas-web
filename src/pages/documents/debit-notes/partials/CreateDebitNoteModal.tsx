@@ -17,7 +17,9 @@ export default function CreateDebitNoteModal({ initialValues, invoice }: { invoi
                     <ModalHeader>Crear una nota de crédito</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <CreateDebitNotePage initialValues={initialValues} invoice={invoice} />
+                        <CreateDebitNotePage
+                            onCompleted={() => onClose()}
+                            initialValues={initialValues} invoice={invoice} />
                     </ModalBody>
                 </ModalContent>
             </Modal>

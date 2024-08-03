@@ -6,7 +6,7 @@ export default function ExchangeRateList() {
     
     const { exchangeRate } = useExchangeRate()
 
-    return <Table variant={'striped'}>
+    return <Table variant={'striped'} size={'sm'}>
         <Thead>
             <Tr>
                 <Th>Divisa</Th>

@@ -46,6 +46,7 @@ export default function useQuery<T>(props: UseQueryProps<T>) {
     return {
         data,
         loading,
-        error
+        error,
+        refetch: fetchData
     }
 }

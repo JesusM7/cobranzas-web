@@ -5,7 +5,7 @@ export default function ProductList() {
 
     const { products } = useProducts()
 
-    return <Table variant={'striped'}>
+    return <Table variant={'striped'} size={'sm'}>
         <Thead>
             <Tr>
                 <Th>SKU</Th>

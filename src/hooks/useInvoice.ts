@@ -3,7 +3,7 @@ import useQuery from "./useQuery"
 
 export default function useInvoice({ invoiceNumber }: { invoiceNumber?: string }) {
 
-    const { data, error, loading } = useQuery<Invoice | undefined>({
+    const { data, error, loading, refetch } = useQuery<Invoice | undefined>({
         endpoint: `/api/v1/invoices/${invoiceNumber}`,
         defaultValue: undefined,
         omit: !invoiceNumber
@@ -12,7 +12,8 @@ export default function useInvoice({ invoiceNumber }: { invoiceNumber?: string }
     return {
         invoice: data,
         error,
-        loading
+        loading,
+        refetch
     }
 
 }

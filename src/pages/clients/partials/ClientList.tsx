@@ -5,7 +5,7 @@ export default function ClientList() {
 
     const { clients } = useClients()
 
-    return <Table variant={'striped'}>
+    return <Table variant={'striped'} size={'sm'}>
         <Thead>
             <Tr>
                 <Th>RIF</Th>

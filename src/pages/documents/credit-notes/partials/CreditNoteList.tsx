@@ -26,7 +26,7 @@ export default function CreditNotelist({ invoice }: { invoice: Invoice }) {
             <Tr>
                 <Th>Número</Th>
                 <Th>Monto USD</Th>
-                <Th>Fecha de Emisión</Th>
+                <Th>F. Emisión</Th>
                 <Th>Observación</Th>
             </Tr>
         </Thead>

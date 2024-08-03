@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormErrorMessage, FormLabel, Grid, GridItem, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text, useToast } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormErrorMessage, FormLabel, Grid, GridItem, Input, NumberInput, NumberInputField, Text, useToast } from "@chakra-ui/react";
 import { isNaN, useFormik } from "formik";
 import moment from "moment";
 import { useLatestExchangeRate } from "../../../../hooks/useExchangeRate";
@@ -7,7 +7,7 @@ import { Invoice } from "../../../../hooks/useInvoices";
 import useSaveDebitNote from "../../../../hooks/useSaveDebitNote";
 import DebouncedInput from "../../../../components/DebouncedInput";
 
-export default function CreateDebitNotePage({ initialValues, invoice }: { invoice: Invoice, initialValues?: CreateDebitNoteValues }) {
+export default function CreateDebitNotePage({ initialValues, invoice, onCompleted }: { invoice: Invoice, initialValues?: CreateDebitNoteValues, onCompleted?: () => void }) {
 
     const { saveDebitNote, loading, error } = useSaveDebitNote();
     const toast = useToast();
@@ -27,11 +27,12 @@ export default function CreateDebitNotePage({ initialValues, invoice }: { invoic
         validateOnChange: true,
         onSubmit: async (values) => {
             await saveDebitNote(values);
+            onCompleted?.();
             toast({
                 title: error ? 'Error al crear la Nota de débito' : "Nota de débito creada",
                 description: error ? 'La Nota de débito no pudo ser creada' : "La Nota de débito fue creada exitosamente",
                 status: error ? 'error' : "success",
-                duration: 5000,
+                duration: 2000,
                 isClosable: true,
             });
             if (!error) {
@@ -108,7 +109,7 @@ export default function CreateDebitNotePage({ initialValues, invoice }: { invoic
                             name="amountUsd"
                             type="number"
                             onChange={(v) => formik.setFieldValue('amountUsd', v)}
-                            value={formik.values.amountUsd.toString()}/>
+                            value={formik.values.amountUsd.toString()} />
                         <FormErrorMessage>{formik.errors.amountUsd}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
@@ -120,7 +121,7 @@ export default function CreateDebitNotePage({ initialValues, invoice }: { invoic
                             name="amountBs"
                             type="number"
                             onChange={(v) => formik.setFieldValue('amountBs', v)}
-                            value={formik.values.amountBs.toString()}/>
+                            value={formik.values.amountBs.toString()} />
                         <FormErrorMessage>{formik.errors.amountUsd}</FormErrorMessage>
                     </FormControl>
                 </GridItem>

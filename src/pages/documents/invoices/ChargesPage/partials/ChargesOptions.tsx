@@ -13,15 +13,15 @@ export default function ChargesOptions() {
     if (!invoice) {
         return <span>Cargando...</span>
     }
-     return <Flex>
-        <Card w='33.33%'>
+    return <Flex flexDirection={{ base: 'column', lg: 'row' }} gap={'2ch'}>
+        <Card w={{ base: '100%', lg: '33.33%' }}>
             <ChargesList invoice={invoice} />
         </Card>
-        <Card w='33.33%'>
+        <Card w={{ base: '100%', lg: '33.33%' }}>
             <CreditNotelist invoice={invoice} />
         </Card>
-        <Card w='33.33%'>
-            <DebitNotelist invoice={invoice}/>
+        <Card w={{ base: '100%', lg: '33.33%' }}>
+            <DebitNotelist invoice={invoice} />
         </Card>
     </Flex>
 }

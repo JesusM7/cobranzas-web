@@ -7,7 +7,7 @@ import ChargesOptions from "./partials/ChargesOptions";
 export default function ChargesPage() {
 
     const { invoiceNumber } = useParams<{ invoiceNumber: string }>()
-    const { invoice } = useInvoice({ invoiceNumber })
+    const { invoice, refetch } = useInvoice({ invoiceNumber })
 
     if (!invoice) {
         return <span>Cargando...</span>

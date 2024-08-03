@@ -5,19 +5,19 @@ import InvoicePendingAmount from "../../../../../components/InvoicePendingAmount
 
 export default function InvoiceInfo({ invoice }: { invoice: Invoice }) {
     return (
-        <Table size={'md'} variant={'striped'}>
+        <Table size={'sm'} variant={'striped'}>
             <Thead>
-                <Th>
+                <Th colSpan={5}>
                     <Text color='secondary.500' fontSize={'md'}>Información de la factura</Text>
                 </Th>
             </Thead>
             <Thead>
                 <Tr>
-                <Th fontWeight={'bold'}>Numero</Th>
-                <Th fontWeight={'bold'}>Cliente</Th>
-                <Th fontWeight={'bold'}>F. Emisión</Th>
-                <Th fontWeight={'bold'}>Monto</Th>
-                <Th fontWeight={'bold'}>Monto pendiente</Th>
+                    <Th w='10%' fontWeight={'bold'}>Numero</Th>
+                    <Th w='50%' fontWeight={'bold'}>Cliente</Th>
+                    <Th fontWeight={'bold'}>F. Emisión</Th>
+                    <Th fontWeight={'bold'}>Monto</Th>
+                    <Th fontWeight={'bold'}>Monto pendiente</Th>
                 </Tr>
             </Thead>
             <Tbody>

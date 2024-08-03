@@ -6,7 +6,7 @@ export default function SellerList() {
 
     const { seller: seller } = useSeller()
 
-    return <Table variant={'striped'}>
+    return <Table variant={'striped'} size={'sm'}>
         <Thead>
             <Tr>
                 <Th>Nombre</Th>

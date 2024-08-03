@@ -14,7 +14,7 @@ export default function InvoiceList() {
         return <div>Cargando...</div>
     }
 
-    return <Table variant={'striped'}>
+    return <Table variant={'striped'} size={'sm'}>
         <Thead>
             <Tr>
                 <Th>Número</Th>

@@ -10,14 +10,16 @@ export default function ExtraInfoHomePage({ dashboard }: { dashboard: DashboardI
             <Stat padding={'15px'}>
                 <StatLabel fontWeight={600} >Monto mas alto por cobrar</StatLabel>
                 <StatNumber color={"green"}>{(dashboard.higherPendingInvoice?.amountUsd || 0) - (dashboard.higherPendingInvoice?.charged || 0)} USD</StatNumber>
-                <StatHelpText>{dashboard.higherPendingInvoice?.client.name} - Factura {dashboard.higherPendingInvoice?.number}</StatHelpText>
+                <StatHelpText>{dashboard.higherPendingInvoice?.client.name}</StatHelpText>
+                <StatHelpText>Factura {dashboard.higherPendingInvoice?.number}</StatHelpText>
             </Stat>
         </Card>
         <Card boxShadow={'0px 1px 10px lightgray'}>
             <Stat padding={'15px'}  >
                 <StatLabel fontWeight={600} >Factura con mas dias vencidos</StatLabel>
                 <StatNumber color={"brown"}>{moment().diff(moment(dashboard.olderExpiredInvoice?.expirationDate), 'days')} dias</StatNumber>
-                <StatHelpText>{dashboard.olderExpiredInvoice?.client.name} - Factura {dashboard.olderExpiredInvoice?.number}</StatHelpText>
+                <StatHelpText fontSize={'small'} noOfLines={1}>{dashboard.olderExpiredInvoice?.client.name}</StatHelpText>
+                <StatHelpText fontSize={'small'} noOfLines={1}>Factura {dashboard.olderExpiredInvoice?.number}</StatHelpText>
             </Stat>
         </Card>
         <Card boxShadow={'0px 1px 10px lightgray'}>
