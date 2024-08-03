@@ -26,10 +26,10 @@ export default function InvoiceInfo({ invoice }: { invoice: Invoice }) {
                     <Td>{invoice.client.name}</Td>
                     <Td>{moment(invoice.date).format('DD-MM-YYYY')}</Td>
                     <Td>
-                        <Tag colorScheme='teal'>{invoice.amountUsd} USD</Tag>
+                        <Tag colorScheme='teal'>{invoice.total} USD</Tag>
                     </Td>
                     <Td>
-                        <InvoicePendingAmount amount={invoice.amountUsd} charged={invoice.charged} />
+                        <InvoicePendingAmount amount={invoice.total} charged={invoice.charged} />
                     </Td>
                 </Tr>
             </Tbody>

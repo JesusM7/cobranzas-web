@@ -37,6 +37,7 @@ export type Invoice = Document & {
     creditDays: number;
     charges: any[];
     charged: number;
+    total: number;
 }
 
 export enum DocumentStatus {

@@ -37,7 +37,7 @@ export default function InvoiceList() {
                 }} key={invoice.id} onClick={() => navigate(`/facturas/${invoice.number}/abonos`)}>
                     <Td>{invoice.number}</Td>
                     <Td>{invoice.client.name}</Td>
-                    <Td>USD {invoice.amountUsd}</Td>
+                    <Td>USD {invoice.total}</Td>
                     <Td>USD {invoice.charged}</Td>
                     <Td>{moment(invoice.date).format('DD-MM-YYYY')}</Td>
                     <Td>{moment(invoice.expirationDate).format('DD-MM-YYYY')}</Td>
