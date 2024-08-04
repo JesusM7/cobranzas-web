@@ -10,8 +10,8 @@ export default function ExtraInfoHomePage({ dashboard }: { dashboard: DashboardI
             <Stat padding={'15px'}>
                 <StatLabel fontWeight={600} >Monto mas alto por cobrar</StatLabel>
                 <StatNumber color={"green"}>{(dashboard.higherPendingInvoice?.amountUsd || 0) - (dashboard.higherPendingInvoice?.charged || 0)} USD</StatNumber>
-                <StatHelpText>{dashboard.higherPendingInvoice?.client.name}</StatHelpText>
-                <StatHelpText>Factura {dashboard.higherPendingInvoice?.number}</StatHelpText>
+                <StatHelpText fontSize={'small'}>{dashboard.higherPendingInvoice?.client.name}</StatHelpText>
+                <StatHelpText fontSize={'small'}>Factura {dashboard.higherPendingInvoice?.number}</StatHelpText>
             </Stat>
         </Card>
         <Card boxShadow={'0px 1px 10px lightgray'}>
@@ -26,7 +26,7 @@ export default function ExtraInfoHomePage({ dashboard }: { dashboard: DashboardI
             <Stat padding={'15px'} >
                 <StatLabel fontWeight={600} >Total facturas por cobrar</StatLabel>
                 <StatNumber color={"brown"} >{dashboard.totalPendingInvoices.totalInvoices}</StatNumber>
-                <StatHelpText>en {dashboard.totalPendingInvoices.totalClients} clientes</StatHelpText>
+                <StatHelpText fontSize={'small'}>en {dashboard.totalPendingInvoices.totalClients} clientes</StatHelpText>
             </Stat>
         </Card>
         {/*  <Card >
