@@ -11,7 +11,7 @@ export default function ClientList() {
                 <Th>RIF</Th>
                 <Th>Nombre</Th>
                 <Th>Estado</Th>
-                <Th>Municipio</Th>
+                <Th>Ciudad</Th>
                 <Th>Dirección</Th>
                 <Th>Correo</Th>
                 <Th>Telefono</Th>
@@ -23,7 +23,7 @@ export default function ClientList() {
                     <Td>{client.rif}</Td>
                     <Td>{client.name}</Td>
                     <Td>{client.municipality?.state?.name}</Td>
-                    <Td>{client.municipality?.name}</Td>
+                    <Td>{client.city?.name}</Td>
                     <Td>{client.address}</Td>
                     <Td>{client.email}</Td>
                     <Td>{client.phoneNumber}</Td>

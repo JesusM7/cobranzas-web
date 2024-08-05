@@ -2,51 +2,46 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { config } from "../config";
 import useSession from "./useSession";
-import { Municipality } from "./useMunicipalities";
-import { City } from "./useCities";
+import { State } from "./useStates";
 
-export default function useClients() {
-    const [clients, setClients] = useState<Client[]>([]);
+export default function useCities({ stateId }: { stateId?: string }) {
+    const [cities, setCities] = useState<City[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const { token } = useSession();
 
-    const fetchClients = async () => {
+    const fetchCities = async (stateId?: string) => {
         try {
+            if (!stateId) return;
             setLoading(true);
-            const { data } = await axios.get<Client[]>(`${config.api}/api/v1/clients`, {
+            const { data } = await axios.get<City[]>(`${config.api}/api/v1/states/${stateId}/cities`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             })
-            setClients(data);
+            setCities(data);
         } catch (error) {
-            setError("Error al cargar los estados");
+            setError("Error al cargar las ciudades");
         } finally {
             setLoading(false);
         }
     }
 
     useEffect(() => {
-        fetchClients();
-    }, []);
+        fetchCities(stateId);
+    }, [stateId]);
 
     return {
-        clients,
+        cities,
         loading,
         error
     }
 
 }
 
-export type Client = {
+export type City = {
     id: string;
-    rif: string;
     name: string;
-    phoneNumber: string;
-    address: string;
-    municipalityId: string;
-    email: string | undefined;
-    municipality?: Municipality;
-    city?: City
+    stateId: string;
+    state?: State;
 }

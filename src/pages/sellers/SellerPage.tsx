@@ -10,7 +10,7 @@ export default function SellerPage() {
                 <Text fontWeight={'bold'} color='secondary.500' fontSize={'xx-large'}>Vendedores</Text>
                 <Spacer />
                 <Link to='/crear-vendedor'>
-                    <Button leftIcon={<Icon as={MdAdd} />} colorScheme='secondary'>Agregar Vendedor</Button>
+                    <Button leftIcon={<Icon as={MdAdd} />} colorScheme='secondary' size={"sm"}>Agregar Vendedor</Button>
                 </Link>
             </Flex>
             <SellerList />

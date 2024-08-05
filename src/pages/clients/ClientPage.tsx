@@ -10,7 +10,7 @@ export default function ClientPage() {
                 <Text fontWeight={'bold'} color='secondary.500' fontSize={'xx-large'}>Clientes</Text>
                 <Spacer />
                 <Link to='/crear-cliente'>
-                    <Button leftIcon={<Icon as={MdAdd} />} colorScheme='secondary'>Agregar Cliente</Button>
+                    <Button leftIcon={<Icon as={MdAdd} />} colorScheme='secondary' size={"sm"}>Agregar Cliente</Button>
                 </Link>
             </Flex>
             <ClientList />

@@ -10,7 +10,7 @@ export default function InvoicePage() {
                 <Text fontWeight={'bold'} color='secondary.500' fontSize={'xx-large'}>Facturas</Text>
                 <Spacer />
                 <Link to='/crear-factura'>
-                    <Button leftIcon={<Icon as={MdAdd} />} colorScheme='secondary'>Agregar Factura</Button>
+                    <Button leftIcon={<Icon as={MdAdd} />} colorScheme='secondary' size={"sm"}>Agregar Factura</Button>
                 </Link>
             </Flex>
             <InvoiceList />

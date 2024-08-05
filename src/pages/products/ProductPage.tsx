@@ -10,7 +10,7 @@ export default function ProductPage() {
                 <Text fontWeight={'bold'} color='secondary.500' fontSize={'xx-large'}>Productos</Text>
                 <Spacer />
                 <Link to='/crear-producto'>
-                    <Button leftIcon={<Icon as={MdAdd} />} colorScheme='secondary'>Agregar Producto</Button>
+                    <Button leftIcon={<Icon as={MdAdd} />} colorScheme='secondary' size={"sm"}>Agregar Producto</Button>
                 </Link>
             </Flex>
             <ProductList />

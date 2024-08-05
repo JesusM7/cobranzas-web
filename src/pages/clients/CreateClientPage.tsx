@@ -4,6 +4,7 @@ import StateSelect from "../../components/StateSelect";
 import MunicipalitySelect from "../../components/MuncipalitySelect";
 import { useState } from "react";
 import useSaveClient from "../../hooks/useSaveClient";
+import CitySelect from "../../components/CitySelect";
 
 export default function CreateClientPage({ initialValues }: { initialValues?: CreateClientValues }) {
 
@@ -19,6 +20,7 @@ export default function CreateClientPage({ initialValues }: { initialValues?: Cr
             address: "",
             municipalityId: "",
             rif: "",
+            cityId: "",
         },
         validate: validateCreateClientForm,
         validateOnChange: true,
@@ -99,7 +101,13 @@ export default function CreateClientPage({ initialValues }: { initialValues?: Cr
                         <MunicipalitySelect onChange={formik.handleChange} name='municipalityId' stateId={stateId} />
                         <FormErrorMessage>{formik.errors.municipalityId}</FormErrorMessage>
                     </FormControl>
-
+                </GridItem>
+                <GridItem colSpan={6}>
+                    <FormControl isInvalid={!!formik.errors.cityId} >
+                        <FormLabel as='legend'>Ciudad</FormLabel>
+                        <CitySelect onChange={formik.handleChange} name='cityId' stateId={stateId} />
+                        <FormErrorMessage>{formik.errors.cityId}</FormErrorMessage>
+                    </FormControl>
                 </GridItem>
                 <GridItem colSpan={12}>
                     <FormControl isInvalid={!!formik.errors.address} >
@@ -127,6 +135,7 @@ export type CreateClientValues = {
     phoneNumber: string;
     address: string;
     municipalityId: string;
+    cityId: string;
 }
 
 function validateCreateClientForm(values: CreateClientValues) {
