@@ -13,7 +13,8 @@ export default function useDashboardInfo() {
             totalPendingAmount: 0,
             totalPendingInvoices: { totalInvoices: 0, totalClients: 0 },
             higherPendingInvoice: null,
-            olderExpiredInvoice: null
+            olderExpiredInvoice: null,
+            totalPendingAmountByConsignment: 0,
         }
     })
 
@@ -33,4 +34,5 @@ export type DashboardInfo = {
     higherPendingInvoice?: Invoice | null;
     olderExpiredInvoice?: Invoice | null;
     totalPendingInvoices: { totalInvoices: number, totalClients: number };
+    totalPendingAmountByConsignment: number
 }

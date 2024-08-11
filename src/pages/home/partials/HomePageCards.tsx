@@ -10,9 +10,9 @@ export default function HomePageCards({ dashboard }: { dashboard: DashboardInfo 
     return <Flex flexDir={'row'} gap='10px' padding={'10px'}>
         <Card w='33.33%' bgColor={'blue.100'} color={'blue.800'}>
             <Stat padding={'15px'} >
-                <StatLabel fontSize={"md"} fontWeight={600} >N° de clientes MTD</StatLabel>
-                <StatNumber>{dashboard.monthlyClients}</StatNumber>
-                <StatHelpText>{startOfMonth} - {now}</StatHelpText>
+                <StatLabel fontSize={"md"} fontWeight={600} >Consignación por Cobrar</StatLabel>
+                <StatNumber>{dashboard.totalPendingAmountByConsignment} USD</StatNumber>
+                <StatHelpText>Monto total por cobrar de Consignación</StatHelpText>
             </Stat>
         </Card>
         <Card w='33.33%' bgColor={'green.100'} color={'green.800'}>
@@ -26,7 +26,7 @@ export default function HomePageCards({ dashboard }: { dashboard: DashboardInfo 
             <Stat padding={'15px'} >
                 <StatLabel fontSize={"md"} fontWeight={600} >Vencido por cobrar</StatLabel>
                 <StatNumber color={"brown"} >{dashboard.totalExpiredAmount} USD</StatNumber>
-                <StatHelpText>Monto total vencido por cobrar</StatHelpText>
+                <StatHelpText>Monto total de facturas vencidas por cobrar</StatHelpText>
             </Stat>
         </Card>
         <Card w='33.33%' bgColor={'pink.100'} color={'pink.800'}>

@@ -1,12 +1,11 @@
 import { Button, Divider, HStack, Icon } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
-import { MdHome } from "react-icons/md";
+import { MdAccountBalanceWallet, MdHome } from "react-icons/md";
 import { FaUserCheck } from "react-icons/fa";
 import { FaUsersRectangle } from "react-icons/fa6";
 import { GiPowderBag } from "react-icons/gi";
 import { IoSettingsSharp } from "react-icons/io5";
 import TodayExchangeRate from "./TodayExchangeRate";
-import DocumentsMenu from "./DocumentsMenu";
 
 export default function NavigationBar() {
 
@@ -21,15 +20,14 @@ export default function NavigationBar() {
                 <Button color='white' variant={'navigation_ghost'} leftIcon={<Icon as={MdHome} />}>Inicio</Button>
             </Link>
             <Divider orientation="vertical" />
-            {/* <Link to='/pagos'>
+
+            <Link to='/facturas'>
                 <Button
                     colorScheme="secondary"
-                    variant={pathname === '/pagos' ? 'navigation' : 'navigation_ghost'}
-                    paddingX={'5px'} leftIcon={<Icon as={BsCash} />}>Pagos</Button>
-            </Link> */}
-            {/* <Divider orientation="vertical" /> */}
-            {/* <Button paddingX={'5px'} leftIcon={<Icon as={MdAccountBalanceWallet} />} color='white' variant={'navigation_ghost'}>Documentos</Button> */}
-            <DocumentsMenu />
+                    variant={pathname === '/facturas' ? 'navigation' : 'navigation_ghost'}
+                    paddingX={'5px'} leftIcon={<Icon as={MdAccountBalanceWallet} />}>Facturas</Button>
+            </Link>
+
             <Divider orientation="vertical" />
             <Link to='/clientes'>
                 <Button

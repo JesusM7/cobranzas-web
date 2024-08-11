@@ -21,10 +21,11 @@ export default function InvoiceList() {
                 <Th>Cliente</Th>
                 <Th>Monto USD</Th>
                 <Th>Abonado USD</Th>
-                <Th>Fecha de Emisión</Th>
-                <Th>Fecha de Vencimiento</Th>
+                <Th>F. Emisión</Th>
+                <Th>F. Vencimiento</Th>
                 <Th>Vendedor</Th>
                 <Th>Status</Th>
+                <Th>Condición</Th>
                 <Th>Observación</Th>
             </Tr>
         </Thead>
@@ -43,6 +44,7 @@ export default function InvoiceList() {
                     <Td>{moment(invoice.expirationDate).format('DD-MM-YYYY')}</Td>
                     <Td>{invoice.seller.name}</Td>
                     <Td>{<InvoiceStatus status={invoice.status} />}</Td>
+                    <Td>{invoice.paymentCondition}</Td>
                     <Td>{invoice.observation}</Td>
                 </Tr>
             ))}

@@ -135,9 +135,10 @@ export default function CreateInvoicePage({ initialValues }: { initialValues?: C
                             <NumberInputField
                                 disabled={[PaymentCondition.COUNTED, PaymentCondition.CONSIGNMENT].includes(formik.values.paymentCondition)}
                                 value={formik.values.creditDays.toString()}
-                                onChange={(e) => formik.setFieldValue('creditDays', Number.parseFloat(e.currentTarget.value))}
+                                onChange={(e) => formik.setFieldValue('creditDays', Number.parseFloat(e.currentTarget.value) || "")}
                                 name="creditDays" />
                         </NumberInput>
+
                         <FormErrorMessage>{formik.errors.creditDays}</FormErrorMessage>
                     </FormControl>
                 </GridItem>
